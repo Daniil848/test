@@ -1,21 +1,22 @@
-import { Box, Stack, List, ListItem, Typography, IconButton, TextField, Button} from "@mui/material";
-import { Link } from "react-router-dom";
-import EditIcon from '@mui/icons-material/Edit';
+import { Stack, TextField, Button} from "@mui/material";
 
 const MainPage = () => {
 
   const styles = {
     form : {
+      position : "absolute",
+      top : "35%",
       display : "flex",
       flexDirection : "column",
       width : "450px",
       margin : "auto",
+      verticalAlign : "middle"
     },
   };
 
   return (
     <>
-      <List>
+      {/* <List>
         <Link to={"/student"}>
           <ListItem sx={{
             display : "flex",
@@ -37,11 +38,11 @@ const MainPage = () => {
             </Box>
           </ListItem>
         </Link>
-      </List>
+      </List> */}
       <Stack sx={styles.form} spacing={2}>
-        <TextField></TextField>
-        <TextField></TextField>
-        <TextField></TextField>
+        <TextField label="Ф.И.О."></TextField>
+        <TextField label="Оценка"></TextField>
+        <TextField label="Посещение"></TextField>
         <Button variant="contained" size="large">OK</Button>
       </Stack>
     </>
