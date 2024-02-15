@@ -1,33 +1,31 @@
-import { List, ListItem, Stack, Typography } from "@mui/material";
+import React from 'react';
+import { List, ListItem, Stack, Typography } from '@mui/material';
 
 const StudentPage = () => {
-
   const styles = {
-    studentName : {
-      fontSize : "36px",
-      color : "primary"
+    studentName: {
+      fontSize: '36px',
+      color: 'primary',
     },
-    list : {
-      
+    list: {},
+    listItem: {
+      display: 'flex',
+      justifyContent: 'space-between',
     },
-    listItem : {
-      display : "flex",
-      justifyContent : "space-between",
+    courses: {
+      fontSize: '24px',
+      borderBottom: 2,
+      borderColor: 'primary',
+      width: 'fit-content',
+      margin: 'auto',
     },
-    courses : {
-      fontSize : "24px",
-      borderBottom : 2,
-      borderColor : "primary",
-      width : "fit-content",
-      margin : "auto",
+    courseTitle: {
+      fontSize: '20px',
     },
-    courseTitle : {
-      fontSize : "20px"
-    },
-    grade : {
-      fontSize : "20px",
-      borderBottom : 1,
-      borderColor : "primary"
+    grade: {
+      fontSize: '20px',
+      borderBottom: 1,
+      borderColor: 'primary',
     },
   };
 
@@ -38,7 +36,7 @@ const StudentPage = () => {
         <Typography sx={styles.courses}>Предметы</Typography>
         <ListItem sx={styles.listItem}>
           <Typography sx={styles.courseTitle}>Математика</Typography>
-          <Stack direction='row' spacing={2}>
+          <Stack direction="row" spacing={2}>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>
@@ -53,7 +51,7 @@ const StudentPage = () => {
         </ListItem>
         <ListItem sx={styles.listItem}>
           <Typography sx={styles.courseTitle}>Информатика</Typography>
-          <Stack direction='row' spacing={2}>
+          <Stack direction="row" spacing={2}>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>
@@ -68,7 +66,7 @@ const StudentPage = () => {
         </ListItem>
         <ListItem sx={styles.listItem}>
           <Typography sx={styles.courseTitle}>Биология</Typography>
-          <Stack direction='row' spacing={2}>
+          <Stack direction="row" spacing={2}>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>
@@ -83,7 +81,7 @@ const StudentPage = () => {
         </ListItem>
         <ListItem sx={styles.listItem}>
           <Typography sx={styles.courseTitle}>Физика</Typography>
-          <Stack direction='row' spacing={2}>
+          <Stack direction="row" spacing={2}>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>
@@ -98,7 +96,7 @@ const StudentPage = () => {
         </ListItem>
         <ListItem sx={styles.listItem}>
           <Typography sx={styles.courseTitle}>Химия</Typography>
-          <Stack direction='row' spacing={2}>
+          <Stack direction="row" spacing={2}>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>
             <Typography sx={styles.grade}>5</Typography>

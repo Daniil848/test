@@ -1,16 +1,16 @@
-import { Stack, TextField, Button} from "@mui/material";
+import React from 'react';
+import { Stack, TextField, Button } from '@mui/material';
 
 const MainPage = () => {
-
   const styles = {
-    form : {
-      position : "absolute",
-      top : "35%",
-      display : "flex",
-      flexDirection : "column",
-      width : "450px",
-      margin : "auto",
-      verticalAlign : "middle"
+    form: {
+      position: 'absolute',
+      top: '35%',
+      display: 'flex',
+      flexDirection: 'column',
+      width: '450px',
+      margin: 'auto',
+      verticalAlign: 'middle',
     },
   };
 
@@ -43,7 +43,9 @@ const MainPage = () => {
         <TextField label="Ф.И.О."></TextField>
         <TextField label="Оценка"></TextField>
         <TextField label="Посещение"></TextField>
-        <Button variant="contained" size="large">OK</Button>
+        <Button variant="contained" size="large">
+          OK
+        </Button>
       </Stack>
     </>
   );
