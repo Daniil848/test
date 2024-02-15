@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, TextField, Button } from '@mui/material';
+import { Stack, TextField, Button, MenuItem } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useEffect } from 'react';
 import { getCouses } from '../app/mainSlice';
@@ -26,13 +26,24 @@ const MainPage = () => {
     },
   };
 
+  if (!state.courses) return null;
   return (
     <>
       <Stack sx={styles.form} spacing={2}>
-        <TextField select label="Ф.И.О."></TextField>
-        <TextField select label="Предмет"></TextField>
+        <TextField select label="Ф.И.О.">
+          <MenuItem></MenuItem>
+        </TextField>
+        <TextField select label="Предмет" defaultValue={''}>
+          {state.courses.map((course) => (
+            <MenuItem key={course.id} value={course.name}>
+              {course.name}
+            </MenuItem>
+          ))}
+        </TextField>
         <TextField label="Оценка"></TextField>
-        <TextField select label="Посещение"></TextField>
+        <TextField select label="Посещение">
+          <MenuItem></MenuItem>
+        </TextField>
         <Button variant="contained" size="large">
           OK
         </Button>

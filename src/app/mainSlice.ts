@@ -1,8 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+interface Course {
+  id: number;
+  name: string;
+}
 export interface State {
-  courses: string[] | null;
+  courses: Course[] | null;
   loading: boolean;
   error: boolean | null;
 }
@@ -14,7 +18,7 @@ const initialState: State = {
 };
 
 export const getCouses = createAsyncThunk<
-  string[],
+  Course[],
   void,
   { rejectValue: string }
 >('store/getCourses', async (_, { rejectWithValue }) => {
