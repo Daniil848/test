@@ -2,7 +2,7 @@ import React from 'react';
 import { Stack, TextField, Button, MenuItem } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useEffect } from 'react';
-import { getCouses } from '../app/mainSlice';
+import { getCouses, getStudents } from '../app/mainSlice';
 
 const MainPage = () => {
   const state = useAppSelector((state) => state.students);
@@ -10,6 +10,7 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(getCouses());
+    dispatch(getStudents());
   }, []);
 
   console.log(state.courses);
@@ -26,12 +27,16 @@ const MainPage = () => {
     },
   };
 
-  if (!state.courses) return null;
+  if (!state.courses || !state.students) return null;
   return (
     <>
       <Stack sx={styles.form} spacing={2}>
-        <TextField select label="Ф.И.О.">
-          <MenuItem></MenuItem>
+        <TextField select label="Ф.И.О." defaultValue={''}>
+          {state.students.map((student) => (
+            <MenuItem key={student.id} value={student.name}>
+              {student.name}
+            </MenuItem>
+          ))}
         </TextField>
         <TextField select label="Предмет" defaultValue={''}>
           {state.courses.map((course) => (

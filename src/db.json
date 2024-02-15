@@ -1,22 +1,27 @@
 {
-  "students": [
-    {
-      "id": 1,
-      "name": "Ладыгин Даниил Львович",
-      "courses": {
-        "course": {
-          "courseId": 1,
-          "rating": [3, 5, 4, 3, 5, 4],
-          "visiting": [true, true, true, false, true]
-        }
-      }
-    }
-  ],
   "courses": [
     { "id": 1, "name": "Математика" },
     { "id": 2, "name": "Физика" },
     { "id": 3, "name": "Биология" },
     { "id": 4, "name": "Химия" },
     { "id": 5, "name": "Информатика" }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Ладыгин Даниил Львович",
+      "courses": [
+        {
+          "courseId": 1,
+          "rating": [3, 5, 4, 3, 5, 4],
+          "visiting": [true, true, true, false, true]
+        },
+        {
+          "courseId": 4,
+          "rating": [3, 5, 4, 3, 5, 4],
+          "visiting": [true, true, true, false, true]
+        }
+      ]
+    }
   ]
 }
