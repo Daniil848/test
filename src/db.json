@@ -22,6 +22,22 @@
           "visiting": [true, true, true, false, true]
         }
       ]
+    },
+    {
+      "id": 2,
+      "name": "Ладыгин Всеволод Львович",
+      "courses": [
+        {
+          "courseId": 1,
+          "rating": [3, 5, 4, 3, 5, 4],
+          "visiting": [true, true, true, false, true]
+        },
+        {
+          "courseId": 4,
+          "rating": [3, 5, 4, 3, 5, 4],
+          "visiting": [true, true, true, false, true]
+        }
+      ]
     }
   ]
 }

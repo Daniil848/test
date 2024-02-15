@@ -11,14 +11,18 @@ export interface Student {
   courses: [courseId: number, rating: number[], visiting: boolean[]];
 }
 export interface State {
+  course: Course | null;
   courses: Course[] | null;
+  student: Student | null;
   students: Student[] | null;
   loading: boolean;
   error: boolean | null;
 }
 
 const initialState: State = {
+  course: null,
   courses: [],
+  student: null,
   students: [],
   loading: false,
   error: false,
@@ -31,6 +35,24 @@ export const getCouses = createAsyncThunk<
 >('store/getCourses', async (_, { rejectWithValue }) => {
   try {
     const response = await fetch('http://localhost:3001/courses', {
+      method: 'GET',
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return rejectWithValue('Server Error!');
+  }
+});
+
+export const getSingleCouse = createAsyncThunk<
+  Course,
+  number,
+  { rejectValue: string }
+>('store/getSingleCourse', async (id, { rejectWithValue }) => {
+  try {
+    const response = await fetch(`http://localhost:3001/courses/${id}`, {
       method: 'GET',
     });
     const data = await response.json();
@@ -60,6 +82,24 @@ export const getStudents = createAsyncThunk<
   }
 });
 
+export const getSingleStudent = createAsyncThunk<
+  Student,
+  number,
+  { rejectValue: string }
+>('store/getSingleStudent', async (id, { rejectWithValue }) => {
+  try {
+    const response = await fetch(`http://localhost:3001/students/${id}`, {
+      method: 'GET',
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return rejectWithValue('Server Error!');
+  }
+});
+
 export const mainSlice = createSlice({
   name: 'students',
   initialState,
@@ -74,12 +114,26 @@ export const mainSlice = createSlice({
       .addCase(getCouses.fulfilled, (state, action) => {
         state.courses = action.payload;
       })
+      .addCase(getSingleCouse.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getSingleCouse.fulfilled, (state, action) => {
+        state.course = action.payload;
+      })
       .addCase(getStudents.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(getStudents.fulfilled, (state, action) => {
         state.students = action.payload;
+      })
+      .addCase(getSingleStudent.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getSingleStudent.fulfilled, (state, action) => {
+        state.student = action.payload;
       });
   },
 });
