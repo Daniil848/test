@@ -1,11 +1,23 @@
 import React from 'react';
 import { Stack, TextField, Button } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useEffect } from 'react';
+import { getCouses } from '../app/mainSlice';
 
 const MainPage = () => {
+  const state = useAppSelector((state) => state.students);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCouses());
+  }, []);
+
+  console.log(state.courses);
+
   const styles = {
     form: {
       position: 'absolute',
-      top: '35%',
+      top: '30%',
       display: 'flex',
       flexDirection: 'column',
       width: '450px',
@@ -16,33 +28,11 @@ const MainPage = () => {
 
   return (
     <>
-      {/* <List>
-        <Link to={"/student"}>
-          <ListItem sx={{
-            display : "flex",
-            justifyContent : "space-between",
-            height : "50px",
-            borderBottom : 1,
-            borderColor : "grey.400"
-          }}>
-            <Typography>Bdfyjd Bdfy Bdfyjdbx</Typography>
-            <Box sx={{
-              display : "flex",
-              alignItems : "center",
-              justifyContent : "space-between"
-            }}>
-              <Typography>Средний балл: 4,3</Typography>
-              <IconButton color="primary">
-                <EditIcon/>
-              </IconButton>
-            </Box>
-          </ListItem>
-        </Link>
-      </List> */}
       <Stack sx={styles.form} spacing={2}>
-        <TextField label="Ф.И.О."></TextField>
+        <TextField select label="Ф.И.О."></TextField>
+        <TextField select label="Предмет"></TextField>
         <TextField label="Оценка"></TextField>
-        <TextField label="Посещение"></TextField>
+        <TextField select label="Посещение"></TextField>
         <Button variant="contained" size="large">
           OK
         </Button>
