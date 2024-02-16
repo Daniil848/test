@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useEffect } from 'react';
 import { getCouses, getStudents } from '../app/mainSlice';
 
-const MainPage = () => {
+const HomePage = () => {
   const state = useAppSelector((state) => state.students);
   const dispatch = useAppDispatch();
 
@@ -57,4 +57,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default HomePage;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import MainPage from './components/MainPage';
+import HomePage from './components/HomePage';
 import StudentPage from './components/StudentPage';
 import { Routes, Route } from 'react-router';
 import { Container } from '@mui/material';
@@ -13,7 +13,7 @@ function App() {
       <Header />
       <Container maxWidth="sm" sx={{ marginTop: '64px' }}>
         <Routes>
-          <Route index element={<MainPage />} />
+          <Route index element={<HomePage />} />
           <Route path="/student" element={<StudentPage />} />
         </Routes>
       </Container>
