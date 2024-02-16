@@ -13,7 +13,16 @@ const HomePage = () => {
     dispatch(getStudents());
   }, []);
 
-  console.log(state.courses);
+  const visit = [
+    {
+      label: 'Присутствовал',
+      value: true,
+    },
+    {
+      label: 'Отсутствовал',
+      value: false,
+    },
+  ];
 
   const styles = {
     form: {
@@ -40,14 +49,18 @@ const HomePage = () => {
         </TextField>
         <TextField select label="Предмет" defaultValue={''}>
           {state.courses.map((course) => (
-            <MenuItem key={course.id} value={course.name}>
+            <MenuItem key={course.id} value={course.id}>
               {course.name}
             </MenuItem>
           ))}
         </TextField>
         <TextField label="Оценка"></TextField>
         <TextField select label="Посещение">
-          <MenuItem></MenuItem>
+          {visit.map((visit, index) => (
+            <MenuItem key={index} value={visit.label}>
+              {visit.label}
+            </MenuItem>
+          ))}
         </TextField>
         <Button variant="contained" size="large">
           OK

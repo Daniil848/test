@@ -38,11 +38,6 @@ const Header = () => {
         anchor={'left'}
         open={openSidebar}
         onClose={() => setOpenSidebar(false)}
-        PaperProps={{
-          sx: {
-            bgcolor: 'grey',
-          },
-        }}
       >
         <List>
           <ListItem>
