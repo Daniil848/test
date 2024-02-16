@@ -11,11 +11,11 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getStudents } from '../app/mainSlice';
+import { getStudents, State } from '../app/mainSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 const Header = () => {
-  const state = useAppSelector((state) => state.students);
+  const state: State = useAppSelector((state) => state.students);
   const dispatch = useAppDispatch();
   const [openSidebar, setOpenSidebar] = useState(false);
 

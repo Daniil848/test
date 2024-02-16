@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-interface Course {
+export interface Course {
   id: number;
   name: string;
 }
 export interface Student {
   id: number;
   name: string;
-  courses: [courseId: number, rating: number[], visiting: boolean[]];
+  courses: [{ courseId: number; rating: number[]; visiting: string[] }];
 }
 export interface State {
   course: Course | null;
