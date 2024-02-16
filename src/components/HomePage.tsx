@@ -1,28 +1,37 @@
 import React from 'react';
 import { Stack, TextField, Button, MenuItem } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCouses, getStudents } from '../app/mainSlice';
 
 const HomePage = () => {
   const state = useAppSelector((state) => state.students);
   const dispatch = useAppDispatch();
 
+  const [quantityInputs, setQuantityInputs] = useState<number>(0);
+  const [rating, setRating] = useState<number[]>([]);
+
+  const handleRatingChange = (index: number, value: number) => {
+    const newRating = [...rating];
+    newRating[index] = value;
+    setRating(newRating);
+  };
+
   useEffect(() => {
     dispatch(getCouses());
     dispatch(getStudents());
   }, []);
 
-  const visit = [
-    {
-      label: 'Присутствовал',
-      value: true,
-    },
-    {
-      label: 'Отсутствовал',
-      value: false,
-    },
-  ];
+  // const visit = [
+  //   {
+  //     label: 'Присутствовал',
+  //     value: true,
+  //   },
+  //   {
+  //     label: 'Отсутствовал',
+  //     value: false,
+  //   },
+  // ];
 
   const styles = {
     form: {
@@ -54,14 +63,28 @@ const HomePage = () => {
             </MenuItem>
           ))}
         </TextField>
-        <TextField label="Оценка"></TextField>
-        <TextField select label="Посещение">
+        <TextField
+          label="Количество оценок"
+          type="number"
+          value={quantityInputs}
+          onChange={(e) => setQuantityInputs(Number(e.target.value))}
+        ></TextField>
+        {Array.from({ length: quantityInputs }).map((_, index) => (
+          <TextField
+            label="Оценка"
+            defaultValue={''}
+            key={index}
+            value={rating[index]}
+            onChange={(e) => handleRatingChange(index, Number(e.target.value))}
+          ></TextField>
+        ))}
+        {/* <TextField select label="Посещение">
           {visit.map((visit, index) => (
             <MenuItem key={index} value={visit.label}>
               {visit.label}
             </MenuItem>
           ))}
-        </TextField>
+        </TextField> */}
         <Button variant="contained" size="large">
           OK
         </Button>
