@@ -9,12 +9,21 @@ import {
   ListItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getStudents } from '../app/mainSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 const Header = () => {
+  const state = useAppSelector((state) => state.students);
+  const dispatch = useAppDispatch();
   const [openSidebar, setOpenSidebar] = useState(false);
 
+  useEffect(() => {
+    dispatch(getStudents());
+  }, []);
+
+  if (!state.students) return null;
   return (
     <>
       <AppBar>
@@ -40,9 +49,11 @@ const Header = () => {
         onClose={() => setOpenSidebar(false)}
       >
         <List>
-          <ListItem>
-            <Link to="/student">student</Link>
-          </ListItem>
+          {state.students.map((student) => (
+            <ListItem key={student.id}>
+              <Link to={`/student/${student.id}`}>{student.name}</Link>
+            </ListItem>
+          ))}
         </List>
       </Drawer>
     </>

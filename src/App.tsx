@@ -14,7 +14,7 @@ function App() {
       <Container maxWidth="sm" sx={{ marginTop: '64px' }}>
         <Routes>
           <Route index element={<HomePage />} />
-          <Route path="/student" element={<StudentPage />} />
+          <Route path="/student/:studentId" element={<StudentPage />} />
         </Routes>
       </Container>
       <Footer />
