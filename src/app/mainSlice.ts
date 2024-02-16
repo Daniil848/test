@@ -9,11 +9,23 @@ export interface Student {
   id: number;
   name: string;
 }
+export interface StudentRating {
+  id: string;
+  studentId: number;
+  courseId: number;
+  grades: number[];
+}
+export interface EstimateStudent {
+  studentId: number;
+  courseId: number;
+  grades: number[];
+}
 export interface State {
   course: Course | null;
   courses: Course[] | null;
   student: Student | null;
   students: Student[] | null;
+  studentsRating: StudentRating[] | null;
   loading: boolean;
   error: boolean | null;
 }
@@ -23,11 +35,12 @@ const initialState: State = {
   courses: [],
   student: null,
   students: [],
+  studentsRating: [],
   loading: false,
   error: false,
 };
 
-export const getCouses = createAsyncThunk<
+export const getCourses = createAsyncThunk<
   Course[],
   void,
   { rejectValue: string }
@@ -45,7 +58,7 @@ export const getCouses = createAsyncThunk<
   }
 });
 
-export const getSingleCouse = createAsyncThunk<
+export const getSingleCourse = createAsyncThunk<
   Course,
   number,
   { rejectValue: string }
@@ -99,6 +112,24 @@ export const getSingleStudent = createAsyncThunk<
   }
 });
 
+export const estimateStudent = createAsyncThunk<
+  StudentRating,
+  EstimateStudent,
+  { rejectValue: string }
+>('store/getSingleStudent', async (rating, { rejectWithValue }) => {
+  try {
+    const response = await fetch(`http://localhost:3001/studentsRating`, {
+      method: 'post',
+      body: JSON.stringify(rating),
+    });
+
+    return response.json();
+  } catch (error) {
+    console.log(error);
+    return rejectWithValue('Server Error!');
+  }
+});
+
 export const mainSlice = createSlice({
   name: 'students',
   initialState,
@@ -106,18 +137,18 @@ export const mainSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(getCouses.pending, (state) => {
+      .addCase(getCourses.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getCouses.fulfilled, (state, action) => {
+      .addCase(getCourses.fulfilled, (state, action) => {
         state.courses = action.payload;
       })
-      .addCase(getSingleCouse.pending, (state) => {
+      .addCase(getSingleCourse.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getSingleCouse.fulfilled, (state, action) => {
+      .addCase(getSingleCourse.fulfilled, (state, action) => {
         state.course = action.payload;
       })
       .addCase(getStudents.pending, (state) => {

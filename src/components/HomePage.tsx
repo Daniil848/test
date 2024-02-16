@@ -2,14 +2,19 @@ import React from 'react';
 import { Stack, TextField, Button, MenuItem } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useEffect, useState } from 'react';
-import { Student, getCouses, getStudents } from '../app/mainSlice';
+import {
+  getCourses,
+  getStudents,
+  estimateStudent,
+  EstimateStudent,
+} from '../app/mainSlice';
 
 const HomePage = () => {
   const state = useAppSelector((state) => state.students);
   const dispatch = useAppDispatch();
 
-  const [studentName, setStudentName] = useState<string>('');
-  const [course, setCourse] = useState<number>(0);
+  const [studentID, setStudentID] = useState<number>(0);
+  const [courseID, setCourseID] = useState<number>(0);
   const [quantityInputs, setQuantityInputs] = useState<number>(0);
   const [rating, setRating] = useState<number[]>([]);
 
@@ -19,19 +24,14 @@ const HomePage = () => {
     setRating(newRating);
   };
 
-  const student = {
-    id: 0,
-    name: studentName,
-    courses: [
-      {
-        courseId: course,
-        rating: rating,
-      },
-    ],
+  const ratingDB: EstimateStudent = {
+    studentId: studentID,
+    courseId: courseID,
+    grades: rating,
   };
 
   useEffect(() => {
-    dispatch(getCouses());
+    dispatch(getCourses());
     dispatch(getStudents());
   }, []);
 
@@ -66,10 +66,10 @@ const HomePage = () => {
           select
           label="Ф.И.О."
           defaultValue={''}
-          onChange={(e) => setStudentName(e.target.value)}
+          onChange={(e) => setStudentID(Number(e.target.value))}
         >
           {state.students.map((student) => (
-            <MenuItem key={student.id} value={student.name}>
+            <MenuItem key={student.id} value={student.id}>
               {student.name}
             </MenuItem>
           ))}
@@ -78,7 +78,7 @@ const HomePage = () => {
           select
           label="Предмет"
           defaultValue={''}
-          onChange={(e) => setCourse(Number(e.target.value))}
+          onChange={(e) => setCourseID(Number(e.target.value))}
         >
           {state.courses.map((course) => (
             <MenuItem key={course.id} value={course.id}>
@@ -108,7 +108,11 @@ const HomePage = () => {
             </MenuItem>
           ))}
         </TextField> */}
-        <Button variant="contained" size="large">
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => dispatch(estimateStudent(ratingDB))}
+        >
           OK
         </Button>
       </Stack>

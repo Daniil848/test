@@ -1,10 +1,25 @@
 {
   "courses": [
-    { "id": 1, "name": "Математика" },
-    { "id": 2, "name": "Физика" },
-    { "id": 3, "name": "Биология" },
-    { "id": 4, "name": "Химия" },
-    { "id": 5, "name": "Информатика" }
+    {
+      "id": 1,
+      "name": "Математика"
+    },
+    {
+      "id": 2,
+      "name": "Физика"
+    },
+    {
+      "id": 3,
+      "name": "Биология"
+    },
+    {
+      "id": 4,
+      "name": "Химия"
+    },
+    {
+      "id": 5,
+      "name": "Информатика"
+    }
   ],
   "students": [
     {
@@ -14,22 +29,224 @@
     {
       "id": 2,
       "name": "Ладыгин Всеволод Львович"
+    },
+    {
+      "id": 3,
+      "name": "Тугушев Кирилл Юрьевич"
+    },
+    {
+      "id": 4,
+      "name": "Гатаулин Олег Макимович"
+    },
+    {
+      "id": 5,
+      "name": "Тузов Егор Дмитриевич"
     }
   ],
   "studentsRating": [
     {
-      "id": 1,
+      "id": "33f0",
       "studentId": 1,
-      "courseId": 1,
-      "grades": [4, 5],
-      "decision": "Студент допущен к зачету"
+      "courseId": 4,
+      "grades": [
+        2,
+        5
+      ]
     },
     {
-      "id": 1,
+      "id": "cfd6",
+      "studentId": 3,
+      "courseId": 5,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "3a28",
+      "studentId": 3,
+      "courseId": 1,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "5361",
+      "studentId": 3,
+      "courseId": 2,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "67dd",
+      "studentId": 3,
+      "courseId": 3,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "7eaf",
+      "studentId": 3,
+      "courseId": 4,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "2dcd",
+      "studentId": 3,
+      "courseId": 5,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "f935",
+      "studentId": 1,
+      "courseId": 5,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "876b",
       "studentId": 1,
       "courseId": 3,
-      "grades": [4, 3],
-      "decision": "Студент допущен к зачету"
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "3ac1",
+      "studentId": 1,
+      "courseId": 2,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "b484",
+      "studentId": 1,
+      "courseId": 1,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "2af4",
+      "studentId": 2,
+      "courseId": 3,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "3799",
+      "studentId": 2,
+      "courseId": 2,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "b08d",
+      "studentId": 2,
+      "courseId": 3,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "8512",
+      "studentId": 2,
+      "courseId": 5,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "de0a",
+      "studentId": 2,
+      "courseId": 4,
+      "grades": [
+        3,
+        4,
+        5,
+        5,
+        3,
+        4
+      ]
     }
   ]
 }
