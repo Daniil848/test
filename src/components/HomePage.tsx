@@ -2,12 +2,14 @@ import React from 'react';
 import { Stack, TextField, Button, MenuItem } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useEffect, useState } from 'react';
-import { getCouses, getStudents } from '../app/mainSlice';
+import { Student, getCouses, getStudents } from '../app/mainSlice';
 
 const HomePage = () => {
   const state = useAppSelector((state) => state.students);
   const dispatch = useAppDispatch();
 
+  const [studentName, setStudentName] = useState<string>('');
+  const [course, setCourse] = useState<number>(0);
   const [quantityInputs, setQuantityInputs] = useState<number>(0);
   const [rating, setRating] = useState<number[]>([]);
 
@@ -15,6 +17,17 @@ const HomePage = () => {
     const newRating = [...rating];
     newRating[index] = value;
     setRating(newRating);
+  };
+
+  const student = {
+    id: 0,
+    name: studentName,
+    courses: [
+      {
+        courseId: course,
+        rating: rating,
+      },
+    ],
   };
 
   useEffect(() => {
@@ -49,14 +62,24 @@ const HomePage = () => {
   return (
     <>
       <Stack sx={styles.form} spacing={2}>
-        <TextField select label="Ф.И.О." defaultValue={''}>
+        <TextField
+          select
+          label="Ф.И.О."
+          defaultValue={''}
+          onChange={(e) => setStudentName(e.target.value)}
+        >
           {state.students.map((student) => (
             <MenuItem key={student.id} value={student.name}>
               {student.name}
             </MenuItem>
           ))}
         </TextField>
-        <TextField select label="Предмет" defaultValue={''}>
+        <TextField
+          select
+          label="Предмет"
+          defaultValue={''}
+          onChange={(e) => setCourse(Number(e.target.value))}
+        >
           {state.courses.map((course) => (
             <MenuItem key={course.id} value={course.id}>
               {course.name}

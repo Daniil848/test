@@ -42,15 +42,13 @@ const StudentPage = () => {
     },
   };
 
-  console.log(state.student?.courses);
-
   if (!state.student) return null;
   return (
     <>
       <Typography sx={styles.studentName}>{state.student.name}</Typography>
       <List sx={styles.list}>
         <Typography sx={styles.courses}>Предметы</Typography>
-        {state.student?.courses.map((course) => (
+        {/* {state.student?.courses.map((course) => (
           <ListItem sx={styles.listItem} key={course.courseId}>
             <Typography sx={styles.courseTitle}>{course.courseId}</Typography>
             <Stack direction="row" spacing={2}>
@@ -59,12 +57,12 @@ const StudentPage = () => {
                   {rate}
                 </Typography>
               ))}
-              {/* {course.visiting.map((visit, index) => (
+              {course.visiting.map((visit, index) => (
                 <Typography key={index}>{visit}</Typography>
-              ))} */}
+              ))}
             </Stack>
           </ListItem>
-        ))}
+        ))} */}
       </List>
     </>
   );

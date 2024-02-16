@@ -8,7 +8,6 @@ export interface Course {
 export interface Student {
   id: number;
   name: string;
-  courses: [{ courseId: number; rating: number[] }];
 }
 export interface State {
   course: Course | null;
