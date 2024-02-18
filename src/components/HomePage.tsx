@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, TextField, Button, MenuItem, Grid } from '@mui/material';
+import { Stack, TextField, Button, MenuItem, Grid, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useEffect, useState } from 'react';
 import {
@@ -31,13 +31,13 @@ const HomePage = () => {
     grades: rating,
   };
 
+  const visit = ['Отсутствовал', 'Отсутствовал (Без причины)'];
+
   useEffect(() => {
     dispatch(getCourses());
     dispatch(getStudents());
     dispatch(getStudentsRating());
   }, [dispatch]);
-
-  console.log(state.studentsRating);
 
   const styles = {
     form: {
@@ -49,6 +49,16 @@ const HomePage = () => {
       flexGrow: 1,
       width: '450px',
       margin: 'auto',
+    },
+    grades: {
+      display: 'flex',
+      gap: 2,
+    },
+    gradesGrade: {
+      flexBasis: '35%',
+    },
+    gradesVisit: {
+      flexBasis: '65%',
     },
   };
 
@@ -85,28 +95,30 @@ const HomePage = () => {
           type="number"
           value={quantityInputs}
           onChange={(e) => setQuantityInputs(Number(e.target.value))}
+          inputProps={{ min: 0, max: 5 }}
         ></TextField>
-        <Grid container spacing={1}>
-          {Array.from({ length: quantityInputs }).map((_, index) => (
-            <Grid item xs={4} key={index}>
-              <TextField
-                label="Оценка"
-                defaultValue={''}
-                value={rating[index]}
-                onChange={(e) =>
-                  handleRatingChange(index, Number(e.target.value))
-                }
-              ></TextField>
-            </Grid>
-          ))}
-        </Grid>
-        {/* <TextField select label="Посещение">
-          {visit.map((visit, index) => (
-            <MenuItem key={index} value={visit.label}>
-              {visit.label}
-            </MenuItem>
-          ))}
-        </TextField> */}
+        {Array.from({ length: quantityInputs }).map((_, index) => (
+          <Box key={index} sx={styles.grades}>
+            <TextField
+              label="Оценка"
+              type="number"
+              defaultValue={''}
+              value={rating[index]}
+              onChange={(e) =>
+                handleRatingChange(index, Number(e.target.value))
+              }
+              inputProps={{ min: 2, max: 5 }}
+              sx={styles.gradesGrade}
+            ></TextField>
+            <TextField select label="Посещение" sx={styles.gradesVisit}>
+              {visit.map((visit, index) => (
+                <MenuItem key={index} value={visit}>
+                  {visit}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Box>
+        ))}
         <Button
           variant="contained"
           size="large"
