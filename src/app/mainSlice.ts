@@ -10,15 +10,21 @@ export interface Student {
   id: number;
   name: string;
 }
+export interface Visiting {
+  id: number;
+  value: string;
+}
 export interface StudentRating {
   id: number;
   studentId: number;
   courseId: number;
+  visiting: number[];
   grades: number[];
 }
 export interface EstimateStudent {
   studentId: number;
   courseId: number;
+  visiting: number[];
   grades: number[];
 }
 export interface State {
@@ -26,6 +32,7 @@ export interface State {
   courses: Course[] | null;
   student: Student | null;
   students: Student[] | null;
+  visiting: Visiting[] | null;
   studentsRating: StudentRating[] | null;
   loading: boolean;
   error: boolean | null;
@@ -36,6 +43,7 @@ const initialState: State = {
   courses: [],
   student: null,
   students: [],
+  visiting: [],
   studentsRating: [],
   loading: false,
   error: false,
@@ -98,6 +106,20 @@ export const getSingleStudent = createAsyncThunk<
   }
 });
 
+export const getVisiting = createAsyncThunk<
+  Visiting[],
+  void,
+  { rejectValue: string }
+>('store/getVisiting', async (_, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.get('http://localhost:3001/visiting');
+    return data;
+  } catch (error) {
+    console.log(error);
+    return rejectWithValue('Server Error!');
+  }
+});
+
 export const getStudentsRating = createAsyncThunk<
   StudentRating[],
   void,
@@ -127,12 +149,14 @@ export const estimateStudent = createAsyncThunk<
       );
       if (studentRating) {
         const newGrades = [...studentRating.grades, ...rating.grades];
+        const newVisiting = [...studentRating.visiting, ...rating.visiting];
         const { data } = await axios.put(
           `http://localhost:3001/studentsRating/${studentRating.id}`,
           {
             id: studentRating.id,
             studentId: studentRating.studentId,
             courseId: studentRating.courseId,
+            visiting: newVisiting,
             grades: newGrades,
           },
         );
@@ -186,6 +210,14 @@ export const mainSlice = createSlice({
       })
       .addCase(getSingleStudent.fulfilled, (state, action) => {
         state.student = action.payload;
+      })
+      .addCase(getVisiting.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getVisiting.fulfilled, (state, action) => {
+        state.loading = false;
+        state.visiting = action.payload;
       })
       .addCase(getStudentsRating.pending, (state) => {
         state.loading = true;

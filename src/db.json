@@ -1,4 +1,18 @@
 {
+  "visiting": [
+    {
+      "id": 1,
+      "value": "Присутствовал"
+    },
+    {
+      "id": 2,
+      "value": "Отсутствовал"
+    },
+    {
+      "id": 3,
+      "value": "Отсутствовал (без причины)"
+    }
+  ],
   "courses": [
     {
       "id": 1,
@@ -45,280 +59,19 @@
   ],
   "studentsRating": [
     {
-      "id": 1,
       "studentId": 1,
       "courseId": 1,
-      "grades": [
-        5,
-        4,
-        3,
-        5,
-        3
-      ]
-    },
-    {
-      "studentId": 1,
-      "courseId": 2,
-      "grades": [
-        4,
-        3,
-        5,
-        3
+      "visiting": [
+        1,
+        1,
+        2
       ],
-      "id": 2
-    },
-    {
-      "studentId": 1,
-      "courseId": 3,
       "grades": [
         4,
         3,
-        5,
-        3
+        2
       ],
-      "id": 3
-    },
-    {
-      "studentId": 1,
-      "courseId": 4,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 4
-    },
-    {
-      "studentId": 1,
-      "courseId": 5,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 5
-    },
-    {
-      "studentId": 2,
-      "courseId": 1,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 6
-    },
-    {
-      "studentId": 2,
-      "courseId": 2,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 7
-    },
-    {
-      "studentId": 2,
-      "courseId": 3,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 8
-    },
-    {
-      "studentId": 2,
-      "courseId": 4,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 9
-    },
-    {
-      "studentId": 2,
-      "courseId": 5,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 10
-    },
-    {
-      "studentId": 3,
-      "courseId": 1,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 11
-    },
-    {
-      "studentId": 3,
-      "courseId": 2,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 12
-    },
-    {
-      "studentId": 3,
-      "courseId": 3,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 13
-    },
-    {
-      "studentId": 3,
-      "courseId": 4,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 14
-    },
-    {
-      "studentId": 3,
-      "courseId": 5,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 15
-    },
-    {
-      "studentId": 4,
-      "courseId": 1,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 16
-    },
-    {
-      "studentId": 4,
-      "courseId": 2,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 17
-    },
-    {
-      "studentId": 4,
-      "courseId": 3,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 18
-    },
-    {
-      "studentId": 4,
-      "courseId": 4,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 19
-    },
-    {
-      "studentId": 4,
-      "courseId": 5,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 20
-    },
-    {
-      "studentId": 5,
-      "courseId": 1,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 21
-    },
-    {
-      "studentId": 5,
-      "courseId": 2,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 22
-    },
-    {
-      "studentId": 5,
-      "courseId": 3,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 23
-    },
-    {
-      "studentId": 5,
-      "courseId": 4,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 24
-    },
-    {
-      "studentId": 5,
-      "courseId": 5,
-      "grades": [
-        4,
-        3,
-        5,
-        3
-      ],
-      "id": 25
+      "id": 1
     }
   ]
 }

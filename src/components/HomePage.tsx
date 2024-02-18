@@ -1,10 +1,11 @@
 import React from 'react';
-import { Stack, TextField, Button, MenuItem, Grid, Box } from '@mui/material';
+import { Stack, TextField, Button, MenuItem, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useEffect, useState } from 'react';
 import {
   getCourses,
   getStudents,
+  getVisiting,
   estimateStudent,
   EstimateStudent,
   getStudentsRating,
@@ -18,6 +19,7 @@ const HomePage = () => {
   const [courseID, setCourseID] = useState<number>(0);
   const [quantityInputs, setQuantityInputs] = useState<number>(0);
   const [rating, setRating] = useState<number[]>([]);
+  const [visit, setVisit] = useState<number[]>([]);
 
   const handleRatingChange = (index: number, value: number) => {
     const newRating = [...rating];
@@ -25,19 +27,27 @@ const HomePage = () => {
     setRating(newRating);
   };
 
+  const handleVisitingChange = (index: number, value: number) => {
+    const newVisiting = [...visit];
+    newVisiting[index] = value;
+    setVisit(newVisiting);
+  };
+
   const ratingDB: EstimateStudent = {
     studentId: studentID,
     courseId: courseID,
+    visiting: visit,
     grades: rating,
   };
 
-  const visit = ['Отсутствовал', 'Отсутствовал (Без причины)'];
+  console.log('1', ratingDB);
 
   useEffect(() => {
     dispatch(getCourses());
     dispatch(getStudents());
+    dispatch(getVisiting());
     dispatch(getStudentsRating());
-  }, [dispatch]);
+  }, []);
 
   const styles = {
     form: {
@@ -62,7 +72,13 @@ const HomePage = () => {
     },
   };
 
-  if (!state.courses || !state.students || !state.studentsRating) return null;
+  if (
+    !state.courses ||
+    !state.students ||
+    !state.visiting ||
+    !state.studentsRating
+  )
+    return null;
   return (
     <>
       <Stack sx={styles.form} spacing={2}>
@@ -102,20 +118,29 @@ const HomePage = () => {
             <TextField
               label="Оценка"
               type="number"
-              defaultValue={''}
+              defaultValue={0}
               value={rating[index]}
               onChange={(e) =>
                 handleRatingChange(index, Number(e.target.value))
               }
-              inputProps={{ min: 2, max: 5 }}
+              inputProps={{ min: 0, max: 5 }}
               sx={styles.gradesGrade}
             ></TextField>
-            <TextField select label="Посещение" sx={styles.gradesVisit}>
-              {visit.map((visit, index) => (
-                <MenuItem key={index} value={visit}>
-                  {visit}
-                </MenuItem>
-              ))}
+            <TextField
+              select
+              label="Посещение"
+              sx={styles.gradesVisit}
+              onChange={(e) =>
+                handleVisitingChange(index, Number(e.target.value))
+              }
+            >
+              {state.visiting
+                ? state.visiting.map((option) => (
+                    <MenuItem key={option.id} value={option.id}>
+                      {option.value}
+                    </MenuItem>
+                  ))
+                : null}
             </TextField>
           </Box>
         ))}
