@@ -7,7 +7,7 @@ import {
   getStudents,
   estimateStudent,
   EstimateStudent,
-  StudentRating,
+  getStudentsRating,
 } from '../app/mainSlice';
 
 const HomePage = () => {
@@ -25,8 +25,7 @@ const HomePage = () => {
     setRating(newRating);
   };
 
-  const ratingDB: StudentRating = {
-    id: '',
+  const ratingDB: EstimateStudent = {
     studentId: studentID,
     courseId: courseID,
     grades: rating,
@@ -35,7 +34,10 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(getCourses());
     dispatch(getStudents());
-  }, []);
+    dispatch(getStudentsRating());
+  }, [dispatch]);
+
+  console.log(state.studentsRating);
 
   const styles = {
     form: {
@@ -50,7 +52,7 @@ const HomePage = () => {
     },
   };
 
-  if (!state.courses || !state.students) return null;
+  if (!state.courses || !state.students || !state.studentsRating) return null;
   return (
     <>
       <Stack sx={styles.form} spacing={2}>
@@ -108,7 +110,14 @@ const HomePage = () => {
         <Button
           variant="contained"
           size="large"
-          onClick={() => dispatch(estimateStudent(ratingDB))}
+          onClick={() =>
+            dispatch(
+              estimateStudent({
+                rating: ratingDB,
+                studentsRating: state.studentsRating,
+              }),
+            )
+          }
         >
           OK
         </Button>

@@ -11,7 +11,7 @@ export interface Student {
   name: string;
 }
 export interface StudentRating {
-  id: string;
+  id: number;
   studentId: number;
   courseId: number;
   grades: number[];
@@ -98,16 +98,13 @@ export const getSingleStudent = createAsyncThunk<
   }
 });
 
-export const estimateStudent = createAsyncThunk<
+export const getStudentsRating = createAsyncThunk<
   StudentRating[],
-  StudentRating,
+  void,
   { rejectValue: string }
->('store/estimateStudent', async (rating, { rejectWithValue }) => {
+>('store/getStudentsRating', async (_, { rejectWithValue }) => {
   try {
-    const { data } = await axios.post(
-      `http://localhost:3001/studentsRating`,
-      rating,
-    );
+    const { data } = await axios.get(`http://localhost:3001/studentsRating`);
 
     return data;
   } catch (error) {
@@ -115,6 +112,45 @@ export const estimateStudent = createAsyncThunk<
     return rejectWithValue('Server Error!');
   }
 });
+
+export const estimateStudent = createAsyncThunk<
+  StudentRating,
+  { rating: EstimateStudent; studentsRating: StudentRating[] | null },
+  { rejectValue: string }
+>(
+  'store/estimateStudent',
+  async ({ rating, studentsRating }, { rejectWithValue }) => {
+    try {
+      const studentRating = studentsRating?.find(
+        (el) =>
+          el.studentId === rating.studentId && el.courseId === rating.courseId,
+      );
+      if (studentRating) {
+        const newGrades = [...studentRating.grades, ...rating.grades];
+        const { data } = await axios.put(
+          `http://localhost:3001/studentsRating/${studentRating.id}`,
+          {
+            id: studentRating.id,
+            studentId: studentRating.studentId,
+            courseId: studentRating.courseId,
+            grades: newGrades,
+          },
+        );
+        console.log(1);
+        return data;
+      } else {
+        const { data } = await axios.post(
+          `http://localhost:3001/studentsRating`,
+          rating,
+        );
+        return data;
+      }
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue('Server Error!');
+    }
+  },
+);
 
 export const mainSlice = createSlice({
   name: 'students',
@@ -151,12 +187,18 @@ export const mainSlice = createSlice({
       .addCase(getSingleStudent.fulfilled, (state, action) => {
         state.student = action.payload;
       })
+      .addCase(getStudentsRating.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getStudentsRating.fulfilled, (state, action) => {
+        state.studentsRating = action.payload;
+      })
       .addCase(estimateStudent.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(estimateStudent.fulfilled, (state, action) => {
-        state.studentsRating = action.payload;
+      .addCase(estimateStudent.fulfilled, (state) => {
         state.loading = false;
       });
   },
