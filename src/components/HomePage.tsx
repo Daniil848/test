@@ -7,6 +7,7 @@ import {
   getStudents,
   estimateStudent,
   EstimateStudent,
+  StudentRating,
 } from '../app/mainSlice';
 
 const HomePage = () => {
@@ -24,7 +25,8 @@ const HomePage = () => {
     setRating(newRating);
   };
 
-  const ratingDB: EstimateStudent = {
+  const ratingDB: StudentRating = {
+    id: '',
     studentId: studentID,
     courseId: courseID,
     grades: rating,

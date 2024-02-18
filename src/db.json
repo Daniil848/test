@@ -247,6 +247,16 @@
         3,
         4
       ]
+    },
+    {
+      "id": "mvkxUXk",
+      "studentId": 1,
+      "courseId": 3,
+      "grades": [
+        5,
+        3,
+        4
+      ]
     }
   ]
 }

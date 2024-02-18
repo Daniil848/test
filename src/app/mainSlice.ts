@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export interface Course {
   id: number;
@@ -46,11 +47,7 @@ export const getCourses = createAsyncThunk<
   { rejectValue: string }
 >('store/getCourses', async (_, { rejectWithValue }) => {
   try {
-    const response = await fetch('http://localhost:3001/courses', {
-      method: 'GET',
-    });
-    const data = await response.json();
-
+    const { data } = await axios.get('http://localhost:3001/courses');
     return data;
   } catch (error) {
     console.log(error);
@@ -64,11 +61,7 @@ export const getSingleCourse = createAsyncThunk<
   { rejectValue: string }
 >('store/getSingleCourse', async (id, { rejectWithValue }) => {
   try {
-    const response = await fetch(`http://localhost:3001/courses/${id}`, {
-      method: 'GET',
-    });
-    const data = await response.json();
-
+    const { data } = await axios.get(`http://localhost:3001/courses/${id}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -82,11 +75,7 @@ export const getStudents = createAsyncThunk<
   { rejectValue: string }
 >('store/getStudents', async (_, { rejectWithValue }) => {
   try {
-    const response = await fetch('http://localhost:3001/students', {
-      method: 'GET',
-    });
-    const data = await response.json();
-
+    const { data } = await axios.get('http://localhost:3001/students');
     return data;
   } catch (error) {
     console.log(error);
@@ -100,10 +89,7 @@ export const getSingleStudent = createAsyncThunk<
   { rejectValue: string }
 >('store/getSingleStudent', async (id, { rejectWithValue }) => {
   try {
-    const response = await fetch(`http://localhost:3001/students/${id}`, {
-      method: 'GET',
-    });
-    const data = await response.json();
+    const { data } = await axios.get(`http://localhost:3001/students/${id}`);
 
     return data;
   } catch (error) {
@@ -113,17 +99,17 @@ export const getSingleStudent = createAsyncThunk<
 });
 
 export const estimateStudent = createAsyncThunk<
+  StudentRating[],
   StudentRating,
-  EstimateStudent,
   { rejectValue: string }
->('store/getSingleStudent', async (rating, { rejectWithValue }) => {
+>('store/estimateStudent', async (rating, { rejectWithValue }) => {
   try {
-    const response = await fetch(`http://localhost:3001/studentsRating`, {
-      method: 'post',
-      body: JSON.stringify(rating),
-    });
+    const { data } = await axios.post(
+      `http://localhost:3001/studentsRating`,
+      rating,
+    );
 
-    return response.json();
+    return data;
   } catch (error) {
     console.log(error);
     return rejectWithValue('Server Error!');
@@ -164,6 +150,14 @@ export const mainSlice = createSlice({
       })
       .addCase(getSingleStudent.fulfilled, (state, action) => {
         state.student = action.payload;
+      })
+      .addCase(estimateStudent.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(estimateStudent.fulfilled, (state, action) => {
+        state.studentsRating = action.payload;
+        state.loading = false;
       });
   },
 });
