@@ -15,7 +15,7 @@ import { getStudents, State } from '../app/mainSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 const Header = () => {
-  const state: State = useAppSelector((state) => state.students);
+  const state: State = useAppSelector((state) => state.slice);
   const dispatch = useAppDispatch();
   const [openSidebar, setOpenSidebar] = useState(false);
 

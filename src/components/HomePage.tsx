@@ -8,23 +8,23 @@ import {
   getVisiting,
   estimateStudent,
   EstimateStudent,
-  getStudentsRating,
+  getStudentsGrades,
 } from '../app/mainSlice';
 
 const HomePage = () => {
-  const state = useAppSelector((state) => state.students);
+  const state = useAppSelector((state) => state.slice);
   const dispatch = useAppDispatch();
 
   const [studentID, setStudentID] = useState<number>(0);
   const [courseID, setCourseID] = useState<number>(0);
   const [quantityInputs, setQuantityInputs] = useState<number>(0);
-  const [rating, setRating] = useState<number[]>([]);
+  const [grades, setGrades] = useState<number[]>([]);
   const [visit, setVisit] = useState<number[]>([]);
 
   const handleRatingChange = (index: number, value: number) => {
-    const newRating = [...rating];
+    const newRating = [...grades];
     newRating[index] = value;
-    setRating(newRating);
+    setGrades(newRating);
   };
 
   const handleVisitingChange = (index: number, value: number) => {
@@ -33,20 +33,18 @@ const HomePage = () => {
     setVisit(newVisiting);
   };
 
-  const ratingDB: EstimateStudent = {
+  const gradesDB: EstimateStudent = {
     studentId: studentID,
     courseId: courseID,
     visiting: visit,
-    grades: rating,
+    grades: grades,
   };
-
-  console.log('1', ratingDB);
 
   useEffect(() => {
     dispatch(getCourses());
     dispatch(getStudents());
     dispatch(getVisiting());
-    dispatch(getStudentsRating());
+    dispatch(getStudentsGrades());
   }, []);
 
   const styles = {
@@ -76,7 +74,7 @@ const HomePage = () => {
     !state.courses ||
     !state.students ||
     !state.visiting ||
-    !state.studentsRating
+    !state.studentsGrades
   )
     return null;
   return (
@@ -119,7 +117,7 @@ const HomePage = () => {
               label="Оценка"
               type="number"
               defaultValue={0}
-              value={rating[index]}
+              value={grades[index]}
               onChange={(e) =>
                 handleRatingChange(index, Number(e.target.value))
               }
@@ -150,8 +148,8 @@ const HomePage = () => {
           onClick={() =>
             dispatch(
               estimateStudent({
-                rating: ratingDB,
-                studentsRating: state.studentsRating,
+                gradesDB: gradesDB,
+                studentsGrades: state.studentsGrades,
               }),
             )
           }

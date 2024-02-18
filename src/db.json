@@ -59,19 +59,25 @@
   ],
   "studentsRating": [
     {
+      "id": 1,
       "studentId": 1,
       "courseId": 1,
       "visiting": [
         1,
         1,
-        2
+        2,
+        1,
+        1,
+        1
       ],
       "grades": [
         4,
         3,
-        2
-      ],
-      "id": 1
+        2,
+        2,
+        5,
+        4
+      ]
     }
   ]
 }

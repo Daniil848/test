@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import { getSingleStudent, State } from '../app/mainSlice';
 
 const StudentPage = () => {
-  const state: State = useAppSelector((state) => state.students);
+  const state: State = useAppSelector((state) => state.slice);
   const dispatch = useAppDispatch();
   const { studentId } = useParams();
 

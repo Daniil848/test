@@ -14,7 +14,7 @@ export interface Visiting {
   id: number;
   value: string;
 }
-export interface StudentRating {
+export interface StudentGrades {
   id: number;
   studentId: number;
   courseId: number;
@@ -33,7 +33,7 @@ export interface State {
   student: Student | null;
   students: Student[] | null;
   visiting: Visiting[] | null;
-  studentsRating: StudentRating[] | null;
+  studentsGrades: StudentGrades[] | null;
   loading: boolean;
   error: boolean | null;
 }
@@ -44,7 +44,7 @@ const initialState: State = {
   student: null,
   students: [],
   visiting: [],
-  studentsRating: [],
+  studentsGrades: [],
   loading: false,
   error: false,
 };
@@ -120,11 +120,11 @@ export const getVisiting = createAsyncThunk<
   }
 });
 
-export const getStudentsRating = createAsyncThunk<
-  StudentRating[],
+export const getStudentsGrades = createAsyncThunk<
+  StudentGrades[],
   void,
   { rejectValue: string }
->('store/getStudentsRating', async (_, { rejectWithValue }) => {
+>('store/getStudentsGrades', async (_, { rejectWithValue }) => {
   try {
     const { data } = await axios.get(`http://localhost:3001/studentsRating`);
 
@@ -136,26 +136,27 @@ export const getStudentsRating = createAsyncThunk<
 });
 
 export const estimateStudent = createAsyncThunk<
-  StudentRating,
-  { rating: EstimateStudent; studentsRating: StudentRating[] | null },
+  StudentGrades,
+  { gradesDB: EstimateStudent; studentsGrades: StudentGrades[] | null },
   { rejectValue: string }
 >(
   'store/estimateStudent',
-  async ({ rating, studentsRating }, { rejectWithValue }) => {
+  async ({ gradesDB, studentsGrades }, { rejectWithValue }) => {
     try {
-      const studentRating = studentsRating?.find(
+      const studentGrades = studentsGrades?.find(
         (el) =>
-          el.studentId === rating.studentId && el.courseId === rating.courseId,
+          el.studentId === gradesDB.studentId &&
+          el.courseId === gradesDB.courseId,
       );
-      if (studentRating) {
-        const newGrades = [...studentRating.grades, ...rating.grades];
-        const newVisiting = [...studentRating.visiting, ...rating.visiting];
+      if (studentGrades) {
+        const newGrades = [...studentGrades.grades, ...gradesDB.grades];
+        const newVisiting = [...studentGrades.visiting, ...gradesDB.visiting];
         const { data } = await axios.put(
-          `http://localhost:3001/studentsRating/${studentRating.id}`,
+          `http://localhost:3001/studentsRating/${studentGrades.id}`,
           {
-            id: studentRating.id,
-            studentId: studentRating.studentId,
-            courseId: studentRating.courseId,
+            id: studentGrades.id,
+            studentId: studentGrades.studentId,
+            courseId: studentGrades.courseId,
             visiting: newVisiting,
             grades: newGrades,
           },
@@ -165,7 +166,7 @@ export const estimateStudent = createAsyncThunk<
       } else {
         const { data } = await axios.post(
           `http://localhost:3001/studentsRating`,
-          rating,
+          gradesDB,
         );
         return data;
       }
@@ -177,7 +178,7 @@ export const estimateStudent = createAsyncThunk<
 );
 
 export const mainSlice = createSlice({
-  name: 'students',
+  name: 'slice',
   initialState,
   reducers: {},
 
@@ -219,12 +220,12 @@ export const mainSlice = createSlice({
         state.loading = false;
         state.visiting = action.payload;
       })
-      .addCase(getStudentsRating.pending, (state) => {
+      .addCase(getStudentsGrades.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getStudentsRating.fulfilled, (state, action) => {
-        state.studentsRating = action.payload;
+      .addCase(getStudentsGrades.fulfilled, (state, action) => {
+        state.studentsGrades = action.payload;
       })
       .addCase(estimateStudent.pending, (state) => {
         state.loading = true;

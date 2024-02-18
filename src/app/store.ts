@@ -3,7 +3,7 @@ import studentsSlise from './mainSlice';
 
 export const store = configureStore({
   reducer: {
-    students: studentsSlise,
+    slice: studentsSlise,
   },
 });
 
