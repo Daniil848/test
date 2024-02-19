@@ -7,9 +7,9 @@ import {
   getStudents,
   getVisiting,
   estimateStudent,
-  EstimateStudent,
   getStudentsGrades,
 } from '../app/mainSlice';
+import { EstimateStudent } from '../app/types';
 
 const HomePage = () => {
   const state = useAppSelector((state) => state.slice);
