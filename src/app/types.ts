@@ -25,11 +25,11 @@ export interface EstimateStudent {
 }
 export interface State {
   course: Course | null;
-  courses: Course[] | null;
+  courses: Course[];
   student: Student | null;
-  students: Student[] | null;
-  visiting: Visiting[] | null;
-  studentsGrades: StudentGrades[] | null;
+  students: Student[];
+  visiting: Visiting[];
+  studentsGrades: StudentGrades[];
   loading: boolean;
-  error: boolean | null;
+  error: boolean;
 }

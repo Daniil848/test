@@ -94,18 +94,29 @@ export const getVisiting = createAsyncThunk<
 
 export const getStudentsGrades = createAsyncThunk<
   StudentGrades[],
-  void,
+  number | null,
   { rejectValue: string }
->('store/getStudentsGrades', async (_, { rejectWithValue }) => {
-  try {
-    const { data } = await axios.get(`http://localhost:3001/studentsRating`);
+>(
+  'store/getStudentsGrades',
+  async (studentId: number | null, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/studentsRating`);
 
-    return data;
-  } catch (error) {
-    console.log(error);
-    return rejectWithValue('Server Error!');
-  }
-});
+      const filteredData = data.filter(
+        (grades: { studentId: number }) => grades.studentId === studentId,
+      );
+      if (studentId === null) {
+        return data;
+      } else {
+        filteredData;
+      }
+      return filteredData;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue('Server Error!');
+    }
+  },
+);
 
 export const estimateStudent = createAsyncThunk<
   StudentGrades,
@@ -158,35 +169,35 @@ export const mainSlice = createSlice({
     builder
       .addCase(getCourses.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = false;
       })
       .addCase(getCourses.fulfilled, (state, action) => {
         state.courses = action.payload;
       })
       .addCase(getSingleCourse.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = false;
       })
       .addCase(getSingleCourse.fulfilled, (state, action) => {
         state.course = action.payload;
       })
       .addCase(getStudents.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = false;
       })
       .addCase(getStudents.fulfilled, (state, action) => {
         state.students = action.payload;
       })
       .addCase(getSingleStudent.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = false;
       })
       .addCase(getSingleStudent.fulfilled, (state, action) => {
         state.student = action.payload;
       })
       .addCase(getVisiting.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = false;
       })
       .addCase(getVisiting.fulfilled, (state, action) => {
         state.loading = false;
@@ -194,14 +205,14 @@ export const mainSlice = createSlice({
       })
       .addCase(getStudentsGrades.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = false;
       })
       .addCase(getStudentsGrades.fulfilled, (state, action) => {
         state.studentsGrades = action.payload;
       })
       .addCase(estimateStudent.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = false;
       })
       .addCase(estimateStudent.fulfilled, (state) => {
         state.loading = false;

@@ -22,15 +22,15 @@ const HomePage = () => {
   const [visit, setVisit] = useState<number[]>([]);
 
   const handleRatingChange = (index: number, value: number) => {
-    const newRating = [...grades];
-    newRating[index] = value;
-    setGrades(newRating);
+    const newGrades = [...grades];
+    newGrades[index] = value;
+    setGrades(newGrades);
   };
 
   const handleVisitingChange = (index: number, value: number) => {
-    const newVisiting = [...visit];
-    newVisiting[index] = value;
-    setVisit(newVisiting);
+    const newVisit = [...visit];
+    newVisit[index] = value;
+    setVisit(newVisit);
   };
 
   const gradesDB: EstimateStudent = {
@@ -44,7 +44,7 @@ const HomePage = () => {
     dispatch(getCourses());
     dispatch(getStudents());
     dispatch(getVisiting());
-    dispatch(getStudentsGrades());
+    dispatch(getStudentsGrades(null));
   }, []);
 
   const styles = {

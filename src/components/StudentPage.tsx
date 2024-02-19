@@ -1,18 +1,35 @@
 import React, { useEffect } from 'react';
-import { List, ListItem, Stack, Typography } from '@mui/material';
+import {
+  Typography,
+  Table,
+  TableContainer,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useParams } from 'react-router';
-import { getSingleStudent, State } from '../app/mainSlice';
+import {
+  getSingleStudent,
+  getStudentsGrades,
+  getCourses,
+  getVisiting,
+} from '../app/mainSlice';
 
 const StudentPage = () => {
-  const state: State = useAppSelector((state) => state.slice);
+  const state = useAppSelector((state) => state.slice);
   const dispatch = useAppDispatch();
   const { studentId } = useParams();
 
   useEffect(() => {
     const id = Number(studentId);
+    dispatch(getCourses());
+    dispatch(getVisiting());
     dispatch(getSingleStudent(id));
-  }, [dispatch, studentId]);
+    dispatch(getStudentsGrades(id));
+  }, []);
+
+  console.log(state.visiting);
 
   const styles = {
     studentName: {
@@ -42,28 +59,18 @@ const StudentPage = () => {
     },
   };
 
-  if (!state.student) return null;
+  if (!state.student) {
+    return null;
+  }
+
   return (
     <>
-      <Typography sx={styles.studentName}>{state.student.name}</Typography>
-      <List sx={styles.list}>
-        <Typography sx={styles.courses}>Предметы</Typography>
-        {/* {state.student?.courses.map((course) => (
-          <ListItem sx={styles.listItem} key={course.courseId}>
-            <Typography sx={styles.courseTitle}>{course.courseId}</Typography>
-            <Stack direction="row" spacing={2}>
-              {course.rating.map((rate, index) => (
-                <Typography key={index} sx={styles.rating}>
-                  {rate}
-                </Typography>
-              ))}
-              {course.visiting.map((visit, index) => (
-                <Typography key={index}>{visit}</Typography>
-              ))}
-            </Stack>
-          </ListItem>
-        ))} */}
-      </List>
+      <Typography>{state.student.name}</Typography>
+      <TableContainer>
+        <Table>
+          <TableBody></TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 };
