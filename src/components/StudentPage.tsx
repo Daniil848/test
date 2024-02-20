@@ -4,6 +4,7 @@ import {
   Table,
   TableContainer,
   TableBody,
+  TableHead,
   TableRow,
   TableCell,
 } from '@mui/material';
@@ -29,7 +30,19 @@ const StudentPage = () => {
     dispatch(getStudentsGrades(id));
   }, []);
 
-  console.log(state.visiting);
+  console.log(state.courses);
+
+  const countVisits = (arr: number[], targetNumber: number) => {
+    let count = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === targetNumber) {
+        count++;
+      }
+    }
+
+    return count;
+  };
 
   const styles = {
     studentName: {
@@ -58,7 +71,6 @@ const StudentPage = () => {
       borderColor: 'primary',
     },
   };
-
   if (!state.student) {
     return null;
   }
@@ -68,7 +80,36 @@ const StudentPage = () => {
       <Typography>{state.student.name}</Typography>
       <TableContainer>
         <Table>
-          <TableBody></TableBody>
+          <TableHead>
+            <TableRow>
+              <TableCell>Курс</TableCell>
+              <TableCell>Оценки</TableCell>
+              <TableCell>Был(а) на знанятиях</TableCell>
+              <TableCell>Пропустил(а)</TableCell>
+              <TableCell>Пропустила(а) без причины</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {state.studentsGrades.map((studentGrades) => (
+              <TableRow key={studentGrades.id}>
+                <TableCell>
+                  {state.courses
+                    .filter((el) => el.id == studentGrades.courseId)
+                    .map((e) => e.name)}
+                </TableCell>
+                <TableCell>{studentGrades.grades}</TableCell>
+                <TableCell>
+                  {countVisits(studentGrades.visiting, 1)} раз
+                </TableCell>
+                <TableCell>
+                  {countVisits(studentGrades.visiting, 2)} раз
+                </TableCell>
+                <TableCell>
+                  {countVisits(studentGrades.visiting, 3)} раз
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Table>
       </TableContainer>
     </>
