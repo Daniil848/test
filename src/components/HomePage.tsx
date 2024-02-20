@@ -32,7 +32,7 @@ const HomePage = () => {
     dispatch(getStudents());
     dispatch(getVisiting());
     dispatch(getStudentsGrades(null));
-  }, []);
+  }, [dispatch]);
 
   const handleRatingChange = (index: number, value: number) => {
     const newGrades = [...grades];
@@ -83,6 +83,9 @@ const HomePage = () => {
       width: '450px',
       margin: 'auto',
     },
+    textField: {
+      textAlign: 'start',
+    },
     grades: {
       display: 'flex',
       gap: 2,
@@ -92,6 +95,7 @@ const HomePage = () => {
     },
     gradesVisit: {
       flexBasis: '65%',
+      textAlign: 'start',
     },
   };
 
@@ -109,6 +113,7 @@ const HomePage = () => {
           select
           label="Ф.И.О."
           defaultValue={''}
+          sx={styles.textField}
           error={state.studentErrorInput === true}
           onChange={(e) => setStudentID(Number(e.target.value))}
         >
@@ -122,6 +127,7 @@ const HomePage = () => {
           select
           label="Предмет"
           defaultValue={''}
+          sx={styles.textField}
           error={state.courseErrorInput === true}
           onChange={(e) => setCourseID(Number(e.target.value))}
         >
