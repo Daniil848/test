@@ -136,19 +136,24 @@ export const estimateStudent = createAsyncThunk<
           el.courseId === gradesDB.courseId,
       );
       if (studentGrades) {
-        const newGrades = [...studentGrades.grades, ...gradesDB.grades].flat();
-        const newVisiting = [
-          ...studentGrades.visiting,
-          ...gradesDB.visiting,
-        ].flat();
+        const newGrades = [...studentGrades.grades, ...gradesDB.grades].filter(
+          (el) => el !== null,
+        );
+
+        const newVisiting = [...studentGrades.visiting, ...gradesDB.visiting];
+
+        const newAverageGrade =
+          newGrades.reduce((acc, number) => acc + number, 0) / newGrades.length;
+
         const { data } = await axios.put(
           `http://localhost:3001/studentsRating/${studentGrades.id}`,
           {
             id: studentGrades.id,
             studentId: studentGrades.studentId,
             courseId: studentGrades.courseId,
-            visiting: newVisiting,
             grades: newGrades,
+            visiting: newVisiting,
+            averageGrade: newAverageGrade,
           },
         );
 
@@ -157,7 +162,13 @@ export const estimateStudent = createAsyncThunk<
       } else {
         const { data } = await axios.post(
           `http://localhost:3001/studentsRating`,
-          gradesDB,
+          {
+            studentId: gradesDB.studentId,
+            courseId: gradesDB.courseId,
+            grades: gradesDB.grades.filter((el) => el !== null),
+            visiting: gradesDB.visiting,
+            averageGrade: gradesDB.averageGrade,
+          },
         );
         toast.success('Данные добавлены');
         return data;

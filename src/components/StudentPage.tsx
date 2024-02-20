@@ -51,10 +51,8 @@ const StudentPage = () => {
       fontSize: '36px',
       color: 'primary',
     },
-    list: {},
-    listItem: {
-      display: 'flex',
-      justifyContent: 'space-between',
+    tableCell: {
+      textAlign: 'center',
     },
   };
   if (!state.student) {
@@ -69,11 +67,15 @@ const StudentPage = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Курс</TableCell>
-                <TableCell>Оценки</TableCell>
-                <TableCell>Был(а) на знанятиях</TableCell>
-                <TableCell>Пропустил(а)</TableCell>
-                <TableCell>Пропустил(а) без причины</TableCell>
+                <TableCell>Предмет</TableCell>
+                <TableCell sx={styles.tableCell}>Оценки</TableCell>
+                <TableCell sx={styles.tableCell}>Был(а) на знанятиях</TableCell>
+                <TableCell sx={styles.tableCell}>Пропустил(а)</TableCell>
+                <TableCell sx={styles.tableCell}>
+                  Пропустил(а) без причины
+                </TableCell>
+                <TableCell sx={styles.tableCell}>Средний балл</TableCell>
+                <TableCell sx={styles.tableCell}>Зачет</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -84,15 +86,20 @@ const StudentPage = () => {
                       .filter((el) => el.id == studentGrades.courseId)
                       .map((e) => e.name)}
                   </TableCell>
-                  <TableCell>{studentGrades.grades}</TableCell>
-                  <TableCell>
+                  <TableCell sx={styles.tableCell}>
+                    {studentGrades.grades.join(', ')}
+                  </TableCell>
+                  <TableCell sx={styles.tableCell}>
                     {countVisits(studentGrades.visiting, 1)} раз
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={styles.tableCell}>
                     {countVisits(studentGrades.visiting, 2)} раз
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={styles.tableCell}>
                     {countVisits(studentGrades.visiting, 3)} раз
+                  </TableCell>
+                  <TableCell sx={styles.tableCell}>
+                    {studentGrades.averageGrade}
                   </TableCell>
                 </TableRow>
               ))}

@@ -16,12 +16,14 @@ export interface StudentGrades {
   courseId: number;
   visiting: number[];
   grades: number[];
+  averageGrade: number;
 }
 export interface EstimateStudent {
   studentId: number;
   courseId: number;
   visiting: number[];
   grades: number[];
+  averageGrade: number;
 }
 export interface State {
   course: Course | null;

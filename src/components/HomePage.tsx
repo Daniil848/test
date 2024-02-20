@@ -74,11 +74,15 @@ const HomePage = () => {
     }
   };
 
+  const averageGrade =
+    grades.reduce((acc, number) => acc + number, 0) / grades.length;
+
   const gradesDB: EstimateStudent = {
     studentId: studentID,
     courseId: courseID,
     visiting: visit,
     grades: grades,
+    averageGrade: averageGrade,
   };
 
   const styles = {
@@ -147,6 +151,7 @@ const HomePage = () => {
         <TextField
           label="Количество оценок"
           type="number"
+          defaultValue={0}
           value={quantityInputs}
           onChange={(e) => setQuantityInputs(Number(e.target.value))}
           inputProps={{ min: 0, max: 5 }}
