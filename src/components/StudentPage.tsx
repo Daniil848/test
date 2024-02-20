@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
   TableCell,
+  Box,
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useParams } from 'react-router';
@@ -24,13 +25,11 @@ const StudentPage = () => {
 
   useEffect(() => {
     const id = Number(studentId);
-    dispatch(getCourses());
-    dispatch(getVisiting());
     dispatch(getSingleStudent(id));
     dispatch(getStudentsGrades(id));
+    dispatch(getCourses());
+    dispatch(getVisiting());
   }, []);
-
-  console.log(state.courses);
 
   const countVisits = (arr: number[], targetNumber: number) => {
     let count = 0;
@@ -45,6 +44,9 @@ const StudentPage = () => {
   };
 
   const styles = {
+    box: {
+      flex: 'none',
+    },
     studentName: {
       fontSize: '36px',
       color: 'primary',
@@ -54,22 +56,6 @@ const StudentPage = () => {
       display: 'flex',
       justifyContent: 'space-between',
     },
-    stack: {},
-    courses: {
-      fontSize: '24px',
-      borderBottom: 2,
-      borderColor: 'primary',
-      width: 'fit-content',
-      margin: 'auto',
-    },
-    courseTitle: {
-      fontSize: '20px',
-    },
-    rating: {
-      fontSize: '20px',
-      borderBottom: 1,
-      borderColor: 'primary',
-    },
   };
   if (!state.student) {
     return null;
@@ -77,41 +63,43 @@ const StudentPage = () => {
 
   return (
     <>
-      <Typography>{state.student.name}</Typography>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Курс</TableCell>
-              <TableCell>Оценки</TableCell>
-              <TableCell>Был(а) на знанятиях</TableCell>
-              <TableCell>Пропустил(а)</TableCell>
-              <TableCell>Пропустила(а) без причины</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {state.studentsGrades.map((studentGrades) => (
-              <TableRow key={studentGrades.id}>
-                <TableCell>
-                  {state.courses
-                    .filter((el) => el.id == studentGrades.courseId)
-                    .map((e) => e.name)}
-                </TableCell>
-                <TableCell>{studentGrades.grades}</TableCell>
-                <TableCell>
-                  {countVisits(studentGrades.visiting, 1)} раз
-                </TableCell>
-                <TableCell>
-                  {countVisits(studentGrades.visiting, 2)} раз
-                </TableCell>
-                <TableCell>
-                  {countVisits(studentGrades.visiting, 3)} раз
-                </TableCell>
+      <Box sx={styles.box}>
+        <Typography sx={styles.studentName}>{state.student.name}</Typography>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Курс</TableCell>
+                <TableCell>Оценки</TableCell>
+                <TableCell>Был(а) на знанятиях</TableCell>
+                <TableCell>Пропустил(а)</TableCell>
+                <TableCell>Пропустил(а) без причины</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {state.studentsGrades.map((studentGrades) => (
+                <TableRow key={studentGrades.id}>
+                  <TableCell>
+                    {state.courses
+                      .filter((el) => el.id == studentGrades.courseId)
+                      .map((e) => e.name)}
+                  </TableCell>
+                  <TableCell>{studentGrades.grades}</TableCell>
+                  <TableCell>
+                    {countVisits(studentGrades.visiting, 1)} раз
+                  </TableCell>
+                  <TableCell>
+                    {countVisits(studentGrades.visiting, 2)} раз
+                  </TableCell>
+                  <TableCell>
+                    {countVisits(studentGrades.visiting, 3)} раз
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
     </>
   );
 };

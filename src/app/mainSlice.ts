@@ -19,6 +19,9 @@ const initialState: State = {
   studentsGrades: [],
   loading: false,
   error: false,
+  studentErrorInput: false,
+  courseErrorInput: false,
+  visitErrorInput: false,
 };
 
 export const getCourses = createAsyncThunk<
@@ -144,7 +147,6 @@ export const estimateStudent = createAsyncThunk<
             grades: newGrades,
           },
         );
-        console.log(1);
         return data;
       } else {
         const { data } = await axios.post(
@@ -163,7 +165,26 @@ export const estimateStudent = createAsyncThunk<
 export const mainSlice = createSlice({
   name: 'slice',
   initialState,
-  reducers: {},
+  reducers: {
+    setNameError(state) {
+      state.studentErrorInput = true;
+    },
+    clearNameError(state) {
+      state.studentErrorInput = false;
+    },
+    setCourseError(state) {
+      state.courseErrorInput = true;
+    },
+    clearCourseError(state) {
+      state.courseErrorInput = false;
+    },
+    setVisitError(state) {
+      state.visitErrorInput = true;
+    },
+    clearVisitError(state) {
+      state.visitErrorInput = false;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -220,6 +241,13 @@ export const mainSlice = createSlice({
   },
 });
 
-// export const {} = mainSlice.actions;
+export const {
+  setNameError,
+  clearNameError,
+  setCourseError,
+  clearCourseError,
+  setVisitError,
+  clearVisitError,
+} = mainSlice.actions;
 
 export default mainSlice.reducer;

@@ -4,19 +4,16 @@ import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import StudentPage from './components/StudentPage';
 import { Routes, Route } from 'react-router';
-import { Container } from '@mui/material';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Container maxWidth="sm" sx={{ marginTop: '64px' }}>
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route path="/student/:studentId" element={<StudentPage />} />
-        </Routes>
-      </Container>
+      <Routes>
+        <Route index element={<HomePage />} />
+        <Route path="/student/:studentId" element={<StudentPage />} />
+      </Routes>
       <Footer />
     </div>
   );

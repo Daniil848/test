@@ -8,6 +8,12 @@ import {
   getVisiting,
   estimateStudent,
   getStudentsGrades,
+  setNameError,
+  clearNameError,
+  setCourseError,
+  clearCourseError,
+  setVisitError,
+  clearVisitError,
 } from '../app/mainSlice';
 import { EstimateStudent } from '../app/types';
 
@@ -21,6 +27,13 @@ const HomePage = () => {
   const [grades, setGrades] = useState<number[]>([]);
   const [visit, setVisit] = useState<number[]>([]);
 
+  useEffect(() => {
+    dispatch(getCourses());
+    dispatch(getStudents());
+    dispatch(getVisiting());
+    dispatch(getStudentsGrades(null));
+  }, []);
+
   const handleRatingChange = (index: number, value: number) => {
     const newGrades = [...grades];
     newGrades[index] = value;
@@ -33,6 +46,27 @@ const HomePage = () => {
     setVisit(newVisit);
   };
 
+  const handleEstimate = (gradesDB: EstimateStudent) => {
+    studentID === 0 ? dispatch(setNameError()) : dispatch(clearNameError());
+    courseID === 0 ? dispatch(setCourseError()) : dispatch(clearCourseError());
+    visit.length != quantityInputs
+      ? dispatch(setVisitError())
+      : dispatch(clearVisitError());
+
+    if (
+      !state.studentErrorInput &&
+      !state.courseErrorInput &&
+      !state.visitErrorInput
+    ) {
+      dispatch(
+        estimateStudent({
+          gradesDB: gradesDB,
+          studentsGrades: state.studentsGrades,
+        }),
+      );
+    }
+  };
+
   const gradesDB: EstimateStudent = {
     studentId: studentID,
     courseId: courseID,
@@ -40,17 +74,8 @@ const HomePage = () => {
     grades: grades,
   };
 
-  useEffect(() => {
-    dispatch(getCourses());
-    dispatch(getStudents());
-    dispatch(getVisiting());
-    dispatch(getStudentsGrades(null));
-  }, []);
-
   const styles = {
     form: {
-      position: 'absolute',
-      top: '30%',
       display: 'flex',
       justifyContent: 'center',
       flexDirection: 'column',
@@ -84,6 +109,7 @@ const HomePage = () => {
           select
           label="Ф.И.О."
           defaultValue={''}
+          error={state.studentErrorInput === true}
           onChange={(e) => setStudentID(Number(e.target.value))}
         >
           {state.students.map((student) => (
@@ -96,6 +122,7 @@ const HomePage = () => {
           select
           label="Предмет"
           defaultValue={''}
+          error={state.courseErrorInput === true}
           onChange={(e) => setCourseID(Number(e.target.value))}
         >
           {state.courses.map((course) => (
@@ -121,13 +148,14 @@ const HomePage = () => {
               onChange={(e) =>
                 handleRatingChange(index, Number(e.target.value))
               }
-              inputProps={{ min: 0, max: 5 }}
+              inputProps={{ min: 2, max: 5 }}
               sx={styles.gradesGrade}
             ></TextField>
             <TextField
               select
               label="Посещение"
               sx={styles.gradesVisit}
+              error={state.visitErrorInput === true}
               onChange={(e) =>
                 handleVisitingChange(index, Number(e.target.value))
               }
@@ -145,14 +173,7 @@ const HomePage = () => {
         <Button
           variant="contained"
           size="large"
-          onClick={() =>
-            dispatch(
-              estimateStudent({
-                gradesDB: gradesDB,
-                studentsGrades: state.studentsGrades,
-              }),
-            )
-          }
+          onClick={() => handleEstimate(gradesDB)}
         >
           OK
         </Button>

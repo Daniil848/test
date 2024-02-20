@@ -32,4 +32,7 @@ export interface State {
   studentsGrades: StudentGrades[];
   loading: boolean;
   error: boolean;
+  studentErrorInput: boolean;
+  courseErrorInput: boolean;
+  visitErrorInput: boolean;
 }
