@@ -32,18 +32,22 @@ const HomePage = () => {
     dispatch(getStudents());
     dispatch(getVisiting());
     dispatch(getStudentsGrades(null));
-  }, [dispatch]);
+  }, [dispatch, grades, visit]);
 
   const handleRatingChange = (index: number, value: number) => {
-    const newGrades = [...grades];
-    newGrades[index] = value;
-    setGrades(newGrades);
+    setGrades((prevGrades) => {
+      const newGrades = [...prevGrades];
+      newGrades[index] = value;
+      return newGrades;
+    });
   };
 
   const handleVisitingChange = (index: number, value: number) => {
-    const newVisit = [...visit];
-    newVisit[index] = value;
-    setVisit(newVisit);
+    setVisit((prevVisit) => {
+      const newVisit = [...prevVisit];
+      newVisit[index] = value;
+      return newVisit;
+    });
   };
 
   const handleEstimate = (gradesDB: EstimateStudent) => {
@@ -64,6 +68,9 @@ const HomePage = () => {
           studentsGrades: state.studentsGrades,
         }),
       );
+      setQuantityInputs(0);
+      setGrades([]);
+      setVisit([]);
     }
   };
 

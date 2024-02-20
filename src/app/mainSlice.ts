@@ -122,7 +122,7 @@ export const getStudentsGrades = createAsyncThunk<
 );
 
 export const estimateStudent = createAsyncThunk<
-  StudentGrades,
+  StudentGrades[],
   { gradesDB: EstimateStudent; studentsGrades: StudentGrades[] | null },
   { rejectValue: string }
 >(
@@ -135,8 +135,11 @@ export const estimateStudent = createAsyncThunk<
           el.courseId === gradesDB.courseId,
       );
       if (studentGrades) {
-        const newGrades = [...studentGrades.grades, ...gradesDB.grades];
-        const newVisiting = [...studentGrades.visiting, ...gradesDB.visiting];
+        const newGrades = [...studentGrades.grades, ...gradesDB.grades].flat();
+        const newVisiting = [
+          ...studentGrades.visiting,
+          ...gradesDB.visiting,
+        ].flat();
         const { data } = await axios.put(
           `http://localhost:3001/studentsRating/${studentGrades.id}`,
           {
@@ -147,6 +150,8 @@ export const estimateStudent = createAsyncThunk<
             grades: newGrades,
           },
         );
+        console.log(data);
+
         return data;
       } else {
         const { data } = await axios.post(
@@ -235,8 +240,9 @@ export const mainSlice = createSlice({
         state.loading = true;
         state.error = false;
       })
-      .addCase(estimateStudent.fulfilled, (state) => {
+      .addCase(estimateStudent.fulfilled, (state, action) => {
         state.loading = false;
+        state.studentsGrades = action.payload;
       });
   },
 });
