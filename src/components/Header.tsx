@@ -7,7 +7,11 @@ import {
   Drawer,
   List,
   ListItem,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -48,13 +52,25 @@ const Header = () => {
         open={openSidebar}
         onClose={() => setOpenSidebar(false)}
       >
-        <List>
-          {state.students.map((student) => (
-            <ListItem key={student.id}>
-              <Link to={`/student/${student.id}`}>{student.name}</Link>
-            </ListItem>
-          ))}
-        </List>
+        <Link to={``}>Home</Link>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            Students
+          </AccordionSummary>
+          <AccordionDetails>
+            <List>
+              {state.students.map((student) => (
+                <ListItem key={student.id}>
+                  <Link to={`/student/${student.id}`}>{student.name}</Link>
+                </ListItem>
+              ))}
+            </List>
+          </AccordionDetails>
+        </Accordion>
       </Drawer>
     </>
   );
