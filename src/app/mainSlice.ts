@@ -9,6 +9,7 @@ import {
   State,
 } from './types';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const initialState: State = {
   course: null,
@@ -150,18 +151,19 @@ export const estimateStudent = createAsyncThunk<
             grades: newGrades,
           },
         );
-        console.log(data);
 
+        toast.success('Данные добавлены');
         return data;
       } else {
         const { data } = await axios.post(
           `http://localhost:3001/studentsRating`,
           gradesDB,
         );
+        toast.success('Данные добавлены');
         return data;
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Ошибка на сервере');
       return rejectWithValue('Server Error!');
     }
   },
