@@ -16,6 +16,7 @@ import {
   clearVisitError,
 } from '../app/mainSlice';
 import { EstimateStudent } from '../app/types';
+import { percentVisiting } from '../helpers';
 
 const HomePage = () => {
   const state = useAppSelector((state) => state.slice);
@@ -83,6 +84,7 @@ const HomePage = () => {
     visiting: visit,
     grades: grades,
     averageGrade: averageGrade,
+    attestation: percentVisiting(visit, 1, averageGrade),
   };
 
   const styles = {

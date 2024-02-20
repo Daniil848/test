@@ -10,6 +10,7 @@ import {
 } from './types';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { percentVisiting } from '../helpers';
 
 const initialState: State = {
   course: null,
@@ -145,6 +146,8 @@ export const estimateStudent = createAsyncThunk<
         const newAverageGrade =
           newGrades.reduce((acc, number) => acc + number, 0) / newGrades.length;
 
+        const newAttestation = percentVisiting(newVisiting, 1, newAverageGrade);
+
         const { data } = await axios.put(
           `http://localhost:3001/studentsRating/${studentGrades.id}`,
           {
@@ -154,6 +157,7 @@ export const estimateStudent = createAsyncThunk<
             grades: newGrades,
             visiting: newVisiting,
             averageGrade: newAverageGrade,
+            attestation: newAttestation,
           },
         );
 
@@ -168,6 +172,7 @@ export const estimateStudent = createAsyncThunk<
             grades: gradesDB.grades.filter((el) => el !== null),
             visiting: gradesDB.visiting,
             averageGrade: gradesDB.averageGrade,
+            attestation: gradesDB.attestation,
           },
         );
         toast.success('Данные добавлены');

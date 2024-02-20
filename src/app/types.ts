@@ -17,6 +17,7 @@ export interface StudentGrades {
   visiting: number[];
   grades: number[];
   averageGrade: number;
+  attestation: boolean;
 }
 export interface EstimateStudent {
   studentId: number;
@@ -24,6 +25,7 @@ export interface EstimateStudent {
   visiting: number[];
   grades: number[];
   averageGrade: number;
+  attestation: boolean;
 }
 export interface State {
   course: Course | null;

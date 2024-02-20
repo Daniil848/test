@@ -99,7 +99,10 @@ const StudentPage = () => {
                     {countVisits(studentGrades.visiting, 3)} раз
                   </TableCell>
                   <TableCell sx={styles.tableCell}>
-                    {studentGrades.averageGrade}
+                    {studentGrades.averageGrade.toFixed(2)}
+                  </TableCell>
+                  <TableCell sx={styles.tableCell}>
+                    {studentGrades.attestation ? 'Зачет' : 'Незачет'}
                   </TableCell>
                 </TableRow>
               ))}
