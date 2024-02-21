@@ -82,7 +82,7 @@ const HomePage = () => {
     studentId: studentID,
     courseId: courseID,
     visiting: visit,
-    grades: grades,
+    grades: grades.filter((el) => el !== null && el > 1),
     averageGrade: averageGrade,
     attestation: percentVisiting(visit, 1, averageGrade),
   };

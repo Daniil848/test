@@ -138,7 +138,7 @@ export const estimateStudent = createAsyncThunk<
       );
       if (studentGrades) {
         const newGrades = [...studentGrades.grades, ...gradesDB.grades].filter(
-          (el) => el !== null,
+          (el) => el !== null && el > 1,
         );
 
         const newVisiting = [...studentGrades.visiting, ...gradesDB.visiting];
@@ -166,7 +166,7 @@ export const estimateStudent = createAsyncThunk<
       } else {
         const filteredGradesDB = {
           ...gradesDB,
-          grades: gradesDB.grades.filter((el) => el !== null),
+          grades: gradesDB.grades.filter((el) => el !== null && el > 1),
         };
 
         const { data } = await axios.post(

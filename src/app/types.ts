@@ -11,7 +11,7 @@ export interface Visiting {
   value: string;
 }
 export interface StudentGrades {
-  id: number;
+  id: string;
   studentId: number;
   courseId: number;
   visiting: number[];
