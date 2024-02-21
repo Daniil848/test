@@ -29,7 +29,7 @@ const StudentPage = () => {
     dispatch(getStudentsGrades(id));
     dispatch(getCourses());
     dispatch(getVisiting());
-  }, []);
+  }, [studentId]);
 
   const countVisits = (arr: number[], targetNumber: number) => {
     let count = 0;

@@ -164,16 +164,14 @@ export const estimateStudent = createAsyncThunk<
         toast.success('Данные добавлены');
         return data;
       } else {
+        const filteredGradesDB = {
+          ...gradesDB,
+          grades: gradesDB.grades.filter((el) => el !== null),
+        };
+
         const { data } = await axios.post(
           `http://localhost:3001/studentsRating`,
-          {
-            studentId: gradesDB.studentId,
-            courseId: gradesDB.courseId,
-            grades: gradesDB.grades.filter((el) => el !== null),
-            visiting: gradesDB.visiting,
-            averageGrade: gradesDB.averageGrade,
-            attestation: gradesDB.attestation,
-          },
+          filteredGradesDB,
         );
         toast.success('Данные добавлены');
         return data;

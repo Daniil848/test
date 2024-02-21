@@ -37,3 +37,20 @@
     transform: translateY(0px);
   }
 }
+
+.sidebar-link {
+  text-decoration: none;
+  font-weight: 500;
+  color: black;
+}
+
+.home {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: larger;
+  color: black;
+  min-width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 18px;
+}
