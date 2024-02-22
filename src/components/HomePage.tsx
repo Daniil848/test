@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, TextField, Button, MenuItem, Box } from '@mui/material';
+import { Stack, TextField, MenuItem, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useEffect, useState } from 'react';
 import {
@@ -17,6 +17,7 @@ import {
 } from '../app/mainSlice';
 import { EstimateStudent } from '../app/types';
 import { percentVisiting } from '../helpers';
+import Button from '../UI/Button';
 
 const HomePage = () => {
   const state = useAppSelector((state) => state.slice);
@@ -51,30 +52,6 @@ const HomePage = () => {
     });
   };
 
-  const handleEstimate = (gradesDB: EstimateStudent) => {
-    studentID === 0 ? dispatch(setNameError()) : dispatch(clearNameError());
-    courseID === 0 ? dispatch(setCourseError()) : dispatch(clearCourseError());
-    visit.length != quantityInputs
-      ? dispatch(setVisitError())
-      : dispatch(clearVisitError());
-
-    if (
-      !state.studentErrorInput &&
-      !state.courseErrorInput &&
-      !state.visitErrorInput
-    ) {
-      dispatch(
-        estimateStudent({
-          gradesDB: gradesDB,
-          studentsGrades: state.studentsGrades,
-        }),
-      );
-      setQuantityInputs(0);
-      setGrades([]);
-      setVisit([]);
-    }
-  };
-
   const filteredGrades = grades.filter((el) => el !== null && el > 1);
 
   const averageGrade =
@@ -88,6 +65,34 @@ const HomePage = () => {
     grades: filteredGrades,
     averageGrade: averageGrade,
     attestation: percentVisiting(visit, 1, averageGrade),
+  };
+
+  const handleEstimate = (gradesDB: EstimateStudent) => {
+    studentID === 0 ? dispatch(setNameError()) : dispatch(clearNameError());
+    courseID === 0 ? dispatch(setCourseError()) : dispatch(clearCourseError());
+    visit.length != quantityInputs && visit.length === 0
+      ? dispatch(setVisitError())
+      : dispatch(clearVisitError());
+
+    if (
+      !state.studentErrorInput &&
+      !state.courseErrorInput &&
+      !state.visitErrorInput &&
+      studentID &&
+      courseID &&
+      visit &&
+      grades
+    ) {
+      dispatch(
+        estimateStudent({
+          gradesDB: gradesDB,
+          studentsGrades: state.studentsGrades,
+        }),
+      );
+      setQuantityInputs(0);
+      setGrades([]);
+      setVisit([]);
+    }
   };
 
   const styles = {
@@ -193,13 +198,9 @@ const HomePage = () => {
             </TextField>
           </Box>
         ))}
-        <Button
-          variant="contained"
-          size="large"
-          onClick={() => handleEstimate(gradesDB)}
-        >
-          OK
-        </Button>
+        <div>
+          <Button onClick={() => handleEstimate(gradesDB)} text="OK" />
+        </div>
       </Stack>
     </>
   );
