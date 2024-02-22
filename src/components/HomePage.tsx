@@ -18,6 +18,7 @@ import {
 import { EstimateStudent } from '../app/types';
 import { percentVisiting } from '../helpers';
 import Button from '../UI/Button';
+import Input from '../UI/Input';
 
 const HomePage = () => {
   const state = useAppSelector((state) => state.slice);
@@ -158,14 +159,15 @@ const HomePage = () => {
             </MenuItem>
           ))}
         </TextField>
-        <TextField
-          label="Количество оценок"
+        <Input
           type="number"
+          label="Количество оценок"
           defaultValue={0}
           value={quantityInputs}
-          onChange={(e) => setQuantityInputs(Number(e.target.value))}
-          inputProps={{ min: 0, max: 5 }}
-        ></TextField>
+          onChange={(e: { target: { value: any } }) =>
+            setQuantityInputs(Number(e.target.value))
+          }
+        ></Input>
         {Array.from({ length: quantityInputs }).map((_, index) => (
           <Box key={index} sx={styles.grades}>
             <TextField
@@ -198,9 +200,8 @@ const HomePage = () => {
             </TextField>
           </Box>
         ))}
-        <div>
-          <Button onClick={() => handleEstimate(gradesDB)} text="OK" />
-        </div>
+
+        <Button onClick={() => handleEstimate(gradesDB)} text="OK" />
       </Stack>
     </>
   );
