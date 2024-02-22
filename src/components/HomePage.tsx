@@ -75,14 +75,17 @@ const HomePage = () => {
     }
   };
 
+  const filteredGrades = grades.filter((el) => el !== null && el > 1);
+
   const averageGrade =
-    grades.reduce((acc, number) => acc + number, 0) / grades.length;
+    filteredGrades.reduce((acc, number) => acc + number, 0) /
+    filteredGrades.length;
 
   const gradesDB: EstimateStudent = {
     studentId: studentID,
     courseId: courseID,
     visiting: visit,
-    grades: grades.filter((el) => el !== null && el > 1),
+    grades: filteredGrades,
     averageGrade: averageGrade,
     attestation: percentVisiting(visit, 1, averageGrade),
   };
