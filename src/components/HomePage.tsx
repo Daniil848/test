@@ -162,25 +162,23 @@ const HomePage = () => {
         <Input
           type="number"
           label="Количество оценок"
+          placeholder="Введите число"
           defaultValue={0}
           value={quantityInputs}
-          onChange={(e: { target: { value: any } }) =>
-            setQuantityInputs(Number(e.target.value))
-          }
+          onChange={(e) => setQuantityInputs(Number(e.target.value))}
         ></Input>
         {Array.from({ length: quantityInputs }).map((_, index) => (
           <Box key={index} sx={styles.grades}>
-            <TextField
-              label="Оценка"
+            <Input
               type="number"
+              label="Оценка"
+              placeholder={undefined}
               defaultValue={0}
               value={grades[index]}
               onChange={(e) =>
                 handleRatingChange(index, Number(e.target.value))
               }
-              inputProps={{ min: 2, max: 5 }}
-              sx={styles.gradesGrade}
-            ></TextField>
+            ></Input>
             <TextField
               select
               label="Посещение"

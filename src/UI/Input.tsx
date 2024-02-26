@@ -4,7 +4,7 @@ import styles from './Input.module.scss';
 const Input = (props: {
   label: string;
   type: string;
-  placeholder: string;
+  placeholder: string | undefined;
   value: string | number;
   defaultValue: string | number;
   onChange:
