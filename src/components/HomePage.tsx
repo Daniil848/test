@@ -19,6 +19,7 @@ import { EstimateStudent } from '../app/types';
 import { percentVisiting } from '../helpers';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
+import Select from '../UI/Select';
 
 const HomePage = () => {
   const state = useAppSelector((state) => state.slice);
@@ -67,6 +68,8 @@ const HomePage = () => {
     averageGrade: averageGrade,
     attestation: percentVisiting(visit, 1, averageGrade),
   };
+
+  console.log(gradesDB);
 
   const handleEstimate = (gradesDB: EstimateStudent) => {
     studentID === 0 ? dispatch(setNameError()) : dispatch(clearNameError());
@@ -131,34 +134,16 @@ const HomePage = () => {
   return (
     <>
       <Stack sx={styles.form} spacing={2}>
-        <TextField
-          select
+        <Select
           label="Ф.И.О."
-          defaultValue={''}
-          sx={styles.textField}
-          error={state.studentErrorInput === true}
           onChange={(e) => setStudentID(Number(e.target.value))}
-        >
-          {state.students.map((student) => (
-            <MenuItem key={student.id} value={student.id}>
-              {student.name}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          select
+          optionValues={state.students}
+        ></Select>
+        <Select
           label="Предмет"
-          defaultValue={''}
-          sx={styles.textField}
-          error={state.courseErrorInput === true}
           onChange={(e) => setCourseID(Number(e.target.value))}
-        >
-          {state.courses.map((course) => (
-            <MenuItem key={course.id} value={course.id}>
-              {course.name}
-            </MenuItem>
-          ))}
-        </TextField>
+          optionValues={state.courses}
+        ></Select>
         <Input
           type="number"
           label="Количество оценок"
@@ -179,23 +164,13 @@ const HomePage = () => {
                 handleRatingChange(index, Number(e.target.value))
               }
             ></Input>
-            <TextField
-              select
+            <Select
               label="Посещение"
-              sx={styles.gradesVisit}
-              error={state.visitErrorInput === true}
               onChange={(e) =>
                 handleVisitingChange(index, Number(e.target.value))
               }
-            >
-              {state.visiting
-                ? state.visiting.map((option) => (
-                    <MenuItem key={option.id} value={option.id}>
-                      {option.value}
-                    </MenuItem>
-                  ))
-                : null}
-            </TextField>
+              optionValues={state.visiting}
+            ></Select>
           </Box>
         ))}
 
