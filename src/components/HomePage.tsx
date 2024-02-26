@@ -14,6 +14,8 @@ import {
   clearCourseError,
   setVisitError,
   clearVisitError,
+  setQuantityError,
+  clearQuantityError,
 } from '../app/mainSlice';
 import { EstimateStudent } from '../app/types';
 import { percentVisiting } from '../helpers';
@@ -69,11 +71,14 @@ const HomePage = () => {
     attestation: percentVisiting(visit, 1, averageGrade),
   };
 
-  console.log(gradesDB);
-
   const handleEstimate = (gradesDB: EstimateStudent) => {
     studentID === 0 ? dispatch(setNameError()) : dispatch(clearNameError());
     courseID === 0 ? dispatch(setCourseError()) : dispatch(clearCourseError());
+
+    quantityInputs === 0
+      ? dispatch(setQuantityError())
+      : dispatch(clearQuantityError());
+
     visit.length != quantityInputs && visit.length === 0
       ? dispatch(setVisitError())
       : dispatch(clearVisitError());
@@ -81,6 +86,7 @@ const HomePage = () => {
     if (
       !state.studentErrorInput &&
       !state.courseErrorInput &&
+      !state.quantityGradesErrorInput &&
       !state.visitErrorInput &&
       studentID &&
       courseID &&
@@ -138,11 +144,13 @@ const HomePage = () => {
           label="Ф.И.О."
           onChange={(e) => setStudentID(Number(e.target.value))}
           optionValues={state.students}
+          error={state.studentErrorInput}
         ></Select>
         <Select
           label="Предмет"
           onChange={(e) => setCourseID(Number(e.target.value))}
           optionValues={state.courses}
+          error={state.courseErrorInput}
         ></Select>
         <Input
           type="number"
@@ -151,6 +159,7 @@ const HomePage = () => {
           defaultValue={0}
           value={quantityInputs}
           onChange={(e) => setQuantityInputs(Number(e.target.value))}
+          error={state.quantityGradesErrorInput}
         ></Input>
         {Array.from({ length: quantityInputs }).map((_, index) => (
           <Box key={index} sx={styles.grades}>
@@ -163,6 +172,7 @@ const HomePage = () => {
               onChange={(e) =>
                 handleRatingChange(index, Number(e.target.value))
               }
+              error={false}
             ></Input>
             <Select
               label="Посещение"
@@ -170,6 +180,7 @@ const HomePage = () => {
                 handleVisitingChange(index, Number(e.target.value))
               }
               optionValues={state.visiting}
+              error={state.visitErrorInput}
             ></Select>
           </Box>
         ))}

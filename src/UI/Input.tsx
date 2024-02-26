@@ -10,18 +10,21 @@ const Input = (props: {
   onChange:
     | React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
     | undefined;
+  error: boolean;
 }) => {
   return (
     <>
       <div className={styles.container}>
-        <label className={styles.label}>{props.label}</label>
+        <label className={props.error ? styles.labelError : styles.label}>
+          {props.label}
+        </label>
         <input
           type={props.type}
           placeholder={props.placeholder}
           value={props.value}
           defaultValue={props.defaultValue}
           onChange={props.onChange}
-          className={styles.input}
+          className={props.error ? styles.inputError : styles.input}
         ></input>
       </div>
     </>

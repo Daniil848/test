@@ -62,22 +62,8 @@
       "id": "fb69",
       "studentId": 1,
       "courseId": 1,
-      "grades": [
-        4,
-        3,
-        5,
-        3,
-        5
-      ],
-      "visiting": [
-        1,
-        1,
-        1,
-        2,
-        3,
-        1,
-        1
-      ],
+      "grades": [4, 3, 5, 3, 5],
+      "visiting": [1, 1, 1, 2, 3, 1, 1],
       "averageGrade": 4,
       "attestation": true
     },
@@ -85,20 +71,8 @@
       "id": "9727",
       "studentId": 1,
       "courseId": 2,
-      "grades": [
-        3,
-        3,
-        2,
-        4
-      ],
-      "visiting": [
-        1,
-        1,
-        1,
-        2,
-        3,
-        1
-      ],
+      "grades": [3, 3, 2, 4],
+      "visiting": [1, 1, 1, 2, 3, 1],
       "averageGrade": 3,
       "attestation": false
     },
@@ -106,18 +80,8 @@
       "id": "f4b8",
       "studentId": 1,
       "courseId": 3,
-      "visiting": [
-        1,
-        1,
-        1,
-        2,
-        2
-      ],
-      "grades": [
-        4,
-        5,
-        2
-      ],
+      "visiting": [1, 1, 1, 2, 2],
+      "grades": [4, 5, 2],
       "averageGrade": 3.6666666666666665,
       "attestation": true
     },
@@ -125,17 +89,8 @@
       "id": "6fb3",
       "studentId": 1,
       "courseId": 4,
-      "visiting": [
-        1,
-        1,
-        2,
-        3,
-        2
-      ],
-      "grades": [
-        5,
-        3
-      ],
+      "visiting": [1, 1, 2, 3, 2],
+      "grades": [5, 3],
       "averageGrade": 4,
       "attestation": false
     },
@@ -143,19 +98,8 @@
       "id": "6651",
       "studentId": 1,
       "courseId": 5,
-      "visiting": [
-        1,
-        1,
-        1,
-        1,
-        2
-      ],
-      "grades": [
-        3,
-        4,
-        4,
-        5
-      ],
+      "visiting": [1, 1, 1, 1, 2],
+      "grades": [3, 4, 4, 5],
       "averageGrade": 4,
       "attestation": true
     }

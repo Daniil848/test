@@ -6,15 +6,18 @@ const Select = (props: {
   label: string;
   onChange: React.ChangeEventHandler<HTMLSelectElement> | undefined;
   optionValues: Student[] | Course[] | Visiting[];
+  error: boolean;
 }) => {
   return (
     <>
       <div className={styles.container}>
-        <label className={styles.label}>{props.label}</label>
+        <label className={props.error ? styles.labelError : styles.label}>
+          {props.label}
+        </label>
         <select
           defaultValue={0}
           onChange={props.onChange}
-          className={styles.select}
+          className={props.error ? styles.selectError : styles.select}
         >
           <option></option>
           {props.optionValues.map((el: any) => (

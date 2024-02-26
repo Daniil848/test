@@ -23,6 +23,7 @@ const initialState: State = {
   error: false,
   studentErrorInput: false,
   courseErrorInput: false,
+  quantityGradesErrorInput: false,
   visitErrorInput: false,
 };
 
@@ -162,11 +163,6 @@ export const estimateStudent = createAsyncThunk<
         toast.success('Данные добавлены');
         return data;
       } else {
-        const filteredGradesDB = {
-          ...gradesDB,
-          grades: gradesDB.grades.filter((el) => el !== null && el > 1),
-        };
-
         const { data } = await axios.post(
           `http://localhost:3001/studentsRating`,
           gradesDB,
@@ -202,6 +198,12 @@ export const mainSlice = createSlice({
     },
     clearVisitError(state) {
       state.visitErrorInput = false;
+    },
+    setQuantityError(state) {
+      state.quantityGradesErrorInput = true;
+    },
+    clearQuantityError(state) {
+      state.quantityGradesErrorInput = false;
     },
   },
 
@@ -268,6 +270,8 @@ export const {
   clearCourseError,
   setVisitError,
   clearVisitError,
+  setQuantityError,
+  clearQuantityError,
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

@@ -38,5 +38,6 @@ export interface State {
   error: boolean;
   studentErrorInput: boolean;
   courseErrorInput: boolean;
+  quantityGradesErrorInput: boolean;
   visitErrorInput: boolean;
 }
