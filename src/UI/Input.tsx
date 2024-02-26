@@ -1,7 +1,16 @@
 import React from 'react';
 import styles from './Input.module.scss';
 
-const Input = (props: any) => {
+const Input = (props: {
+  label: string;
+  type: string;
+  placeholder: string;
+  value: string | number;
+  defaultValue: string | number;
+  onChange:
+    | React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+    | undefined;
+}) => {
   return (
     <>
       <div className={styles.container}>
