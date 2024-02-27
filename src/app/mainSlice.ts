@@ -10,7 +10,7 @@ import {
 } from './types';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { percentVisiting } from '../helpers';
+import { percentVisiting } from '../helpers/percentVisiting';
 
 const initialState: State = {
   course: null,
