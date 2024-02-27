@@ -1,26 +1,20 @@
 import React from 'react';
-import {
-  Drawer,
-  List,
-  ListItem,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  ListItemText,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getStudents } from '../app/mainSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import styles from './Header.module.scss';
 
 const Header = () => {
   const state = useAppSelector((state) => state.slice);
   const dispatch = useAppDispatch();
   const [openSidebar, setOpenSidebar] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState(false);
 
   useEffect(() => {
     dispatch(getStudents());
@@ -37,17 +31,44 @@ const Header = () => {
           >
             <MenuIcon />
           </button>
-          <p>Menu</p>
+          <p className={styles.menuText}>Menu</p>
         </div>
       </header>
-      <aside className={styles.sideBar}>
-        <div className={styles.sideBarItem}>
-          <HomeRoundedIcon></HomeRoundedIcon>
-          <Link to={``} className={styles.sideBarItemText}>
-            Home
-          </Link>
-        </div>
-        {/* <Accordion>
+      {openSidebar && (
+        <aside className={styles.sideBar}>
+          <div className={styles.sideBarClose}>
+            <p className={styles.sideBarCloseText}>Menu</p>
+            <CloseRoundedIcon onClick={() => setOpenSidebar(false)} />
+          </div>
+          <div className={styles.sideBarItem}>
+            <HomeRoundedIcon />
+            <Link to={``} className={styles.sideBarItemText}>
+              Home
+            </Link>
+          </div>
+
+          <div className={styles.sideBarAccordion}>
+            <div
+              className={styles.sideBarAccordionSummary}
+              onClick={() => setOpenAccordion(!openAccordion)}
+            >
+              <div className={styles.sideBarAccordionTitle}>
+                <PeopleRoundedIcon />
+                <p className={styles.sideBarAccordionText}>Students</p>
+              </div>
+              <ExpandMoreIcon />
+            </div>
+            <ul className={styles.sideBarAccordionDetails}>
+              {openAccordion &&
+                state.students.map((student) => (
+                  <li key={student.id} className={styles.sideBarAccordionLink}>
+                    <Link to={`/student/${student.id}`}>{student.name}</Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+
+          {/* <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1-content"
@@ -73,7 +94,8 @@ const Header = () => {
             </List>
           </AccordionDetails>
         </Accordion> */}
-      </aside>
+        </aside>
+      )}
     </>
   );
 };
