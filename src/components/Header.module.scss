@@ -20,3 +20,27 @@
     }
   }
 }
+
+.sideBar {
+  @apply absolute
+  top-0 
+  left-0 
+  min-h-full
+  w-64
+  p-4
+  bg-white
+  border-r;
+
+  .sideBarItem {
+    @apply h-16
+    flex 
+    items-center
+    justify-start;
+
+    .sideBarItemText {
+      @apply font-medium
+      text-[24px]
+      ml-3;
+    }
+  }
+}

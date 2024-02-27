@@ -10,11 +10,11 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getStudents } from '../app/mainSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import '../App.css';
 import styles from './Header.module.scss';
 
 const Header = () => {
@@ -40,15 +40,14 @@ const Header = () => {
           <p>Menu</p>
         </div>
       </header>
-      <Drawer
-        anchor={'left'}
-        open={openSidebar}
-        onClose={() => setOpenSidebar(false)}
-      >
-        <Link to={``} className="home">
-          Home
-        </Link>
-        <Accordion>
+      <aside className={styles.sideBar}>
+        <div className={styles.sideBarItem}>
+          <HomeRoundedIcon></HomeRoundedIcon>
+          <Link to={``} className={styles.sideBarItemText}>
+            Home
+          </Link>
+        </div>
+        {/* <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1-content"
@@ -73,8 +72,8 @@ const Header = () => {
               ))}
             </List>
           </AccordionDetails>
-        </Accordion>
-      </Drawer>
+        </Accordion> */}
+      </aside>
     </>
   );
 };
