@@ -1,9 +1,5 @@
 import React from 'react';
 import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
   Drawer,
   List,
   ListItem,
@@ -19,6 +15,7 @@ import { Link } from 'react-router-dom';
 import { getStudents } from '../app/mainSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import '../App.css';
+import styles from './Header.module.scss';
 
 const Header = () => {
   const state = useAppSelector((state) => state.slice);
@@ -32,23 +29,17 @@ const Header = () => {
   if (!state.students) return null;
   return (
     <>
-      <AppBar>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color={'inherit'}
-            aria-label="menu"
-            sx={{ mr: 2 }}
+      <header className={styles.bar}>
+        <div className={styles.toolBar}>
+          <button
+            className={styles.menuButton}
             onClick={() => setOpenSidebar(true)}
           >
             <MenuIcon />
-          </IconButton>
-          <Typography color="Inherit" variant="h6">
-            Menu
-          </Typography>
-        </Toolbar>
-      </AppBar>
+          </button>
+          <p>Menu</p>
+        </div>
+      </header>
       <Drawer
         anchor={'left'}
         open={openSidebar}

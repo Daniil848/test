@@ -1,5 +1,5 @@
 .container {
-  @apply m-auto w-full flex justify-center flex-col flex-grow;
+  @apply m-auto w-[450px] flex justify-center flex-col flex-grow;
 
   .grades {
     @apply flex gap-2;

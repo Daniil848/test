@@ -1,0 +1,22 @@
+.bar {
+  @apply absolute
+  top-0
+  right-0
+  h-16
+  p-4
+  min-w-full
+  flex
+  items-center
+  bg-green-700
+  text-white;
+
+  .toolBar {
+    @apply flex 
+    justify-start
+    items-center;
+
+    .menuButton {
+      @apply mr-3;
+    }
+  }
+}
