@@ -1,0 +1,14 @@
+.card {
+  @apply w-20
+  h-28
+  p-3;
+
+  .cardImage {
+    @apply w-full
+    h-full;
+  }
+
+  .cradName {
+    @apply text-lg;
+  }
+}

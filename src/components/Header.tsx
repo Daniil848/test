@@ -1,13 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getStudents } from '../../app/studentsSlice';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { getStudents } from '../app/studentsSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
+import FlashOnRoundedIcon from '@mui/icons-material/FlashOnRounded';
 import styles from './Header.module.scss';
 
 const Header = () => {
@@ -58,7 +59,7 @@ const Header = () => {
               </div>
               <ExpandMoreIcon />
             </div>
-            <ul className={styles.sideBarAccordionDetails}>
+            <ul className={openAccordion ? styles.sideBarAccordionDetails : ''}>
               {openAccordion &&
                 state.students.map((student) => (
                   <li key={student.id} className={styles.sideBarAccordionLink}>
@@ -66,6 +67,12 @@ const Header = () => {
                   </li>
                 ))}
             </ul>
+          </div>
+          <div className={styles.sideBarItem}>
+            <FlashOnRoundedIcon />
+            <Link to={`/characters`} className={styles.sideBarItemText}>
+              Rick & Morty
+            </Link>
           </div>
         </aside>
       )}
