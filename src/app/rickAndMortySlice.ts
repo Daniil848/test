@@ -41,7 +41,7 @@ export const getAllCharacters = createAsyncThunk<
     const { data } = await axios.get(
       `https://rickandmortyapi.com/api/character`,
     );
-    return data;
+    return data.results;
   } catch (error) {
     console.log(error);
     return rejectWithValue('Server Error!');
@@ -57,7 +57,7 @@ export const getSingleCharacter = createAsyncThunk<
     const { data } = await axios.get(
       `https://rickandmortyapi.com/api/character/${id}`,
     );
-    return data;
+    return data.results;
   } catch (error) {
     console.log(error);
     return rejectWithValue('Server Error!');

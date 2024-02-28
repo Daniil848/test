@@ -11,11 +11,13 @@ const CharactersPage = () => {
 
   useEffect(() => {
     dispatch(getAllCharacters());
-  }, []);
+  }, [dispatch, state.characters]);
+
+  console.log(state.characters);
 
   return (
     <>
-      <div>
+      <div className={styles.container}>
         {state.characters.map((character) => (
           <CharacterCard
             key={character.id}
