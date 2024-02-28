@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './CharacterCard.module.scss';
 
 const CharactercCard = (props: { id: number; name: string; image: string }) => {

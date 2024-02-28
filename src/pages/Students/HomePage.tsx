@@ -27,51 +27,55 @@ const HomePage = () => {
   )
     return null;
   return (
-    <div className={styles.container}>
-      <Select
-        label="Ф.И.О."
-        onChange={(e) => setStudentID(Number(e.target.value))}
-        optionValues={state.students}
-        error={state.studentErrorInput}
-      ></Select>
-      <Select
-        label="Предмет"
-        onChange={(e) => setCourseID(Number(e.target.value))}
-        optionValues={state.courses}
-        error={state.courseErrorInput}
-      ></Select>
-      <Input
-        type="number"
-        label="Количество оценок"
-        placeholder="Введите число"
-        defaultValue={0}
-        value={quantityInputs}
-        onChange={(e) => setQuantityInputs(Number(e.target.value))}
-        error={state.quantityGradesErrorInput}
-      ></Input>
-      {Array.from({ length: quantityInputs }).map((_, index) => (
-        <div key={index} className={styles.grades}>
-          <Input
-            type="number"
-            label="Оценка"
-            placeholder={undefined}
-            defaultValue={0}
-            value={grades[index]}
-            onChange={(e) => handleRatingChange(index, Number(e.target.value))}
-            error={false}
-          ></Input>
-          <Select
-            label="Посещение"
-            onChange={(e) =>
-              handleVisitingChange(index, Number(e.target.value))
-            }
-            optionValues={state.visiting}
-            error={state.visitErrorInput}
-          ></Select>
-        </div>
-      ))}
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <Select
+          label="Ф.И.О."
+          onChange={(e) => setStudentID(Number(e.target.value))}
+          optionValues={state.students}
+          error={state.studentErrorInput}
+        ></Select>
+        <Select
+          label="Предмет"
+          onChange={(e) => setCourseID(Number(e.target.value))}
+          optionValues={state.courses}
+          error={state.courseErrorInput}
+        ></Select>
+        <Input
+          type="number"
+          label="Количество оценок"
+          placeholder="Введите число"
+          defaultValue={0}
+          value={quantityInputs}
+          onChange={(e) => setQuantityInputs(Number(e.target.value))}
+          error={state.quantityGradesErrorInput}
+        ></Input>
+        {Array.from({ length: quantityInputs }).map((_, index) => (
+          <div key={index} className={styles.grades}>
+            <Input
+              type="number"
+              label="Оценка"
+              placeholder={undefined}
+              defaultValue={0}
+              value={grades[index]}
+              onChange={(e) =>
+                handleRatingChange(index, Number(e.target.value))
+              }
+              error={false}
+            ></Input>
+            <Select
+              label="Посещение"
+              onChange={(e) =>
+                handleVisitingChange(index, Number(e.target.value))
+              }
+              optionValues={state.visiting}
+              error={state.visitErrorInput}
+            ></Select>
+          </div>
+        ))}
 
-      <Button onClick={() => handleEstimate(gradesDB)} text="OK" />
+        <Button onClick={() => handleEstimate(gradesDB)} text="OK" />
+      </div>
     </div>
   );
 };

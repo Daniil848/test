@@ -1,7 +1,10 @@
-.container {
-  @apply m-auto w-[450px] flex justify-center flex-col flex-grow;
+.wrapper {
+  @apply h-[100vh] flex items-center;
+  .container {
+    @apply m-auto w-[450px] flex justify-center flex-col flex-grow;
 
-  .grades {
-    @apply flex gap-2;
+    .grades {
+      @apply flex gap-2;
+    }
   }
 }

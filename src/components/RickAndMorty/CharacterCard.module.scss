@@ -1,11 +1,14 @@
 .card {
-  @apply w-fit
+  @apply box-border w-fit
   h-fit
-  p-3;
+  p-4
+  bg-green-100
+  rounded-lg;
 
   .cardImage {
     @apply w-full
-    h-full;
+    h-full
+    rounded;
   }
 
   .cradName {
