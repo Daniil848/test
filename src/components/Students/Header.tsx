@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getStudents } from '../app/studentsSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { getStudents } from '../../app/studentsSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';

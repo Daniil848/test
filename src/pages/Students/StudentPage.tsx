@@ -9,14 +9,14 @@ import {
   TableCell,
   Box,
 } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useParams } from 'react-router';
 import {
   getSingleStudent,
   getStudentsGrades,
   getCourses,
   getVisiting,
-} from '../app/studentsSlice';
+} from '../../app/studentsSlice';
 
 const StudentPage = () => {
   const state = useAppSelector((state) => state.students);

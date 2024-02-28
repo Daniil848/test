@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useEffect, useState } from 'react';
 import {
   getCourses,
@@ -15,12 +15,12 @@ import {
   clearVisitError,
   setQuantityError,
   clearQuantityError,
-} from '../app/studentsSlice';
-import { EstimateStudent } from '../app/types';
-import { percentVisiting } from '../helpers/percentVisiting';
-import Button from '../UI/Button';
-import Input from '../UI/Input';
-import Select from '../UI/Select';
+} from '../../app/studentsSlice';
+import { EstimateStudent } from '../../app/types';
+import { percentVisiting } from '../../helpers/percentVisiting';
+import Button from '../../UI/Button';
+import Input from '../../UI/Input';
+import Select from '../../UI/Select';
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {
