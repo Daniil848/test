@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import studentsSlise from './studentsSlice';
+import rickAndMortySlice from './rickAndMortySlice';
 
 export const store = configureStore({
   reducer: {
     students: studentsSlise,
+    rickAndMorty: rickAndMortySlice,
   },
 });
 
