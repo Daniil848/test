@@ -177,8 +177,8 @@ export const estimateStudent = createAsyncThunk<
   },
 );
 
-export const mainSlice = createSlice({
-  name: 'slice',
+export const studentsSlice = createSlice({
+  name: 'students',
   initialState,
   reducers: {
     setNameError(state) {
@@ -272,6 +272,6 @@ export const {
   clearVisitError,
   setQuantityError,
   clearQuantityError,
-} = mainSlice.actions;
+} = studentsSlice.actions;
 
-export default mainSlice.reducer;
+export default studentsSlice.reducer;

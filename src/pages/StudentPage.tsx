@@ -16,10 +16,10 @@ import {
   getStudentsGrades,
   getCourses,
   getVisiting,
-} from '../app/mainSlice';
+} from '../app/studentsSlice';
 
 const StudentPage = () => {
-  const state = useAppSelector((state) => state.slice);
+  const state = useAppSelector((state) => state.students);
   const dispatch = useAppDispatch();
   const { studentId } = useParams();
 

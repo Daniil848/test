@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getStudents } from '../app/mainSlice';
+import { getStudents } from '../app/studentsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -11,7 +11,7 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import styles from './Header.module.scss';
 
 const Header = () => {
-  const state = useAppSelector((state) => state.slice);
+  const state = useAppSelector((state) => state.students);
   const dispatch = useAppDispatch();
   const [openSidebar, setOpenSidebar] = useState(false);
   const [openAccordion, setOpenAccordion] = useState(false);
@@ -67,33 +67,6 @@ const Header = () => {
                 ))}
             </ul>
           </div>
-
-          {/* <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-            sx={{ fontWeight: 500, fontSize: '19px' }}
-          >
-            Students
-          </AccordionSummary>
-          <AccordionDetails>
-            <List>
-              {state.students.map((student) => (
-                <ListItem key={student.id}>
-                  <ListItemText>
-                    <Link
-                      to={`/student/${student.id}`}
-                      className="sidebar-link"
-                    >
-                      {student.name}
-                    </Link>
-                  </ListItemText>
-                </ListItem>
-              ))}
-            </List>
-          </AccordionDetails>
-        </Accordion> */}
         </aside>
       )}
     </>

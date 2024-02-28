@@ -15,7 +15,7 @@ import {
   clearVisitError,
   setQuantityError,
   clearQuantityError,
-} from '../app/mainSlice';
+} from '../app/studentsSlice';
 import { EstimateStudent } from '../app/types';
 import { percentVisiting } from '../helpers/percentVisiting';
 import Button from '../UI/Button';
@@ -24,7 +24,7 @@ import Select from '../UI/Select';
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {
-  const state = useAppSelector((state) => state.slice);
+  const state = useAppSelector((state) => state.students);
   const dispatch = useAppDispatch();
 
   const [studentID, setStudentID] = useState<number>(0);
