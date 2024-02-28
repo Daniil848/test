@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useStudentPage } from './useStudentPage';
 import {
   Typography,
   Table,
@@ -9,56 +10,11 @@ import {
   TableCell,
   Box,
 } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { useParams } from 'react-router';
-import {
-  getSingleStudent,
-  getStudentsGrades,
-  getCourses,
-  getVisiting,
-} from '../../app/studentsSlice';
 
 const StudentPage = () => {
-  const state = useAppSelector((state) => state.students);
-  const dispatch = useAppDispatch();
-  const { studentId } = useParams();
+  const { state, countVisits, styles } = useStudentPage();
 
-  useEffect(() => {
-    const id = Number(studentId);
-    dispatch(getSingleStudent(id));
-    dispatch(getStudentsGrades(id));
-    dispatch(getCourses());
-    dispatch(getVisiting());
-  }, [studentId]);
-
-  const countVisits = (arr: number[], targetNumber: number) => {
-    let count = 0;
-
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] === targetNumber) {
-        count++;
-      }
-    }
-
-    return count;
-  };
-
-  const styles = {
-    box: {
-      flex: 'none',
-    },
-    studentName: {
-      fontSize: '36px',
-      color: 'primary',
-    },
-    tableCell: {
-      textAlign: 'center',
-    },
-  };
-  if (!state.student) {
-    return null;
-  }
-
+  if (!state.student) return null;
   return (
     <>
       <Box sx={styles.box}>
