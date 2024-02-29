@@ -33,6 +33,7 @@ export const usePagination = () => {
 
   return {
     state,
+    countPage,
     handlePrev,
     handleNext,
   };
