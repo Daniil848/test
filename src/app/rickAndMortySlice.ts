@@ -39,6 +39,7 @@ export interface RickAndMortyState {
   character: Character | null;
   characters: Character[];
   info: Info;
+  countPage: number;
   loading: boolean;
   error: boolean;
 }
@@ -52,6 +53,7 @@ const initialState: RickAndMortyState = {
     next: '',
     prev: '',
   },
+  countPage: 1,
   loading: false,
   error: false,
 };
@@ -109,7 +111,14 @@ export const getSingleCharacter = createAsyncThunk<
 export const rickAndMortySlice = createSlice({
   name: 'rickAndMorty',
   initialState,
-  reducers: {},
+  reducers: {
+    setNextPage(state) {
+      state.countPage++;
+    },
+    setPrevPage(state) {
+      state.countPage--;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCharactersFirstPage.pending, (state) => {
@@ -140,5 +149,7 @@ export const rickAndMortySlice = createSlice({
       });
   },
 });
+
+export const { setPrevPage, setNextPage } = rickAndMortySlice.actions;
 
 export default rickAndMortySlice.reducer;

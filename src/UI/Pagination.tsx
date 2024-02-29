@@ -3,13 +3,13 @@ import { usePagination } from './logic/usePagination';
 import styles from './Pagination.module.scss';
 
 const Pagination = () => {
-  const { state, countPage, handlePrev, handleNext } = usePagination();
+  const { state, handlePrev, handleNext } = usePagination();
 
   return (
     <>
       <div className={styles.wrapper}>
         <p className={styles.counter}>
-          <span className={styles.counterNumber}>{countPage}</span>
+          <span className={styles.counterNumber}>{state.countPage}</span>
           in
           <span className={styles.counterNumber}>{state.info.pages}</span>
         </p>

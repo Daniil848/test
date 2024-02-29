@@ -1,31 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   getCharactersFirstPage,
   getCharactersPaginate,
+  setPrevPage,
+  setNextPage,
 } from '../../app/rickAndMortySlice';
 
 export const usePagination = () => {
   const state = useAppSelector((state) => state.rickAndMorty);
   const dispatch = useAppDispatch();
 
-  const [countPage, setCountPage] = useState<number>(1);
-
   useEffect(() => {
-    if (countPage === 1) {
+    if (state.countPage === 1) {
       dispatch(getCharactersFirstPage());
     }
   }, []);
 
   const handlePrev = () => {
-    setCountPage(countPage + 1);
+    dispatch(setPrevPage());
     if (state.info.prev) {
       dispatch(getCharactersPaginate(state.info.prev));
     } else return;
   };
 
   const handleNext = () => {
-    setCountPage(countPage - 1);
+    dispatch(setNextPage());
     if (state.info.next) {
       dispatch(getCharactersPaginate(state.info.next));
     } else return;
@@ -33,7 +33,6 @@ export const usePagination = () => {
 
   return {
     state,
-    countPage,
     handlePrev,
     handleNext,
   };
