@@ -6,13 +6,13 @@ import {
   Visiting,
   StudentGrades,
   EstimateStudent,
-  State,
+  StudentsState,
 } from './types';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { percentVisiting } from '../helpers/percentVisiting';
 
-const initialState: State = {
+const initialState: StudentsState = {
   course: null,
   courses: [],
   student: null,
