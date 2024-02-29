@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getAllCharacters } from '../../app/rickAndMortySlice';
-import CharacterCard from '../../components/RickAndMorty/CharacterCard';
+import CharacterCard from '../../components/rickAndMorty/CharacterCard';
 import styles from './CharactersPage.module.scss';
 
 const CharactersPage = () => {

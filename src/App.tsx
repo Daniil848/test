@@ -6,7 +6,7 @@ import StudentPage from './pages/Students/StudentPage';
 import { Toaster } from 'react-hot-toast';
 import { Routes, Route } from 'react-router';
 import './App.css';
-import CharactersPage from './pages/RickAndMorty/CharactersPage';
+import CharactersPage from './pages/rickAndMorty/CharactersPage';
 
 function App() {
   return (
