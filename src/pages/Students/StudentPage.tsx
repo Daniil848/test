@@ -10,7 +10,6 @@ import {
   TableCell,
   Box,
 } from '@mui/material';
-import styles from './StudentPage.module.scss';
 
 const StudentPage = () => {
   const { state, countVisits, styles } = useStudentPage();
