@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useParams } from 'react-router';
 import {
   getSingleStudent,
   getStudentsGrades,
   getCourses,
   getVisiting,
-} from '../../app/studentsSlice';
+} from '../../../app/studentsSlice';
 
 export const useStudentPage = () => {
   const state = useAppSelector((state) => state.students);

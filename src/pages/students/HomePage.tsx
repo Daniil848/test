@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHomePage } from './useHomePage';
+import { useHomePage } from './logic/useHomePage';
 import Button from '../../UI/Button';
 import Input from '../../UI/Input';
 import Select from '../../UI/Select';

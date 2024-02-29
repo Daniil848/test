@@ -22,5 +22,24 @@
       hover:text-gray-700
       cursor-pointer;
     }
+    .paginationItemDisabled {
+      @apply flex 
+      items-center 
+      justify-center 
+      px-4 
+      mx-2
+      my-4
+      h-10
+      w-[95px] 
+      text-base 
+      font-medium 
+      text-slate-300
+      bg-slate-100 
+      border  
+      rounded-lg 
+      hover:bg-gray-100 
+      hover:text-gray-700
+      cursor-none;
+    }
   }
 }

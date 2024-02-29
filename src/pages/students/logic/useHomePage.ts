@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useEffect, useState } from 'react';
 import {
   getCourses,
@@ -14,9 +14,9 @@ import {
   clearVisitError,
   setQuantityError,
   clearQuantityError,
-} from '../../app/studentsSlice';
-import { EstimateStudent } from '../../app/types';
-import { percentVisiting } from '../../helpers/percentVisiting';
+} from '../../../app/studentsSlice';
+import { EstimateStudent } from '../../../app/types';
+import { percentVisiting } from '../../../helpers/percentVisiting';
 
 export const useHomePage = () => {
   const state = useAppSelector((state) => state.students);

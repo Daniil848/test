@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStudentPage } from './useStudentPage';
+import { useStudentPage } from './logic/useStudentPage';
 import {
   Typography,
   Table,
