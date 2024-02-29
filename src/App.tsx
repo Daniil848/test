@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './pages/Students/HomePage';
-import StudentPage from './pages/Students/StudentPage';
+import HomePage from './pages/students/HomePage';
+import StudentPage from './pages/students/StudentPage';
 import { Toaster } from 'react-hot-toast';
 import { Routes, Route } from 'react-router';
 import './App.css';

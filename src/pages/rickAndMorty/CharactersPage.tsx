@@ -1,24 +1,18 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { getAllCharacters } from '../../app/rickAndMortySlice';
+import { useAppSelector } from '../../app/hooks';
 import CharacterCard from '../../components/rickAndMorty/CharacterCard';
 import styles from './CharactersPage.module.scss';
+import Pagination from '../../UI/Pagination';
 
 const CharactersPage = () => {
   const state = useAppSelector((state) => state.rickAndMorty);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getAllCharacters());
-  }, [dispatch, state.characters]);
 
   console.log(state.characters);
 
   return (
     <>
       <div className={styles.container}>
-        {state.characters.map((character) => (
+        {state.characters?.map((character) => (
           <CharacterCard
             key={character.id}
             id={character.id}
@@ -27,6 +21,7 @@ const CharactersPage = () => {
           />
         ))}
       </div>
+      <Pagination />
     </>
   );
 };

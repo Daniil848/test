@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import toast from 'react-hot-toast';
 
 export interface Character {
   id: number;
@@ -10,17 +9,36 @@ export interface Character {
   species: string;
   type: string;
   gender: string;
-  origin: any;
-  location: any;
+  origin: {
+    name: string;
+    url: string;
+  };
+  location: {
+    name: string;
+    url: string;
+  };
   image: string;
   episode: string[];
   url: string;
   created: string;
 }
 
+export interface Info {
+  count: number | null;
+  pages: number | null;
+  next: string;
+  prev: string;
+}
+
+export interface CharactersPageData {
+  info: Info;
+  results: Character[];
+}
+
 export interface RickAndMortyState {
   character: Character | null;
   characters: Character[];
+  info: Info;
   loading: boolean;
   error: boolean;
 }
@@ -28,20 +46,44 @@ export interface RickAndMortyState {
 const initialState: RickAndMortyState = {
   character: null,
   characters: [],
+  info: {
+    count: null,
+    pages: null,
+    next: '',
+    prev: '',
+  },
   loading: false,
   error: false,
 };
 
-export const getAllCharacters = createAsyncThunk<
-  Character[],
+export const getCharactersFirstPage = createAsyncThunk<
+  CharactersPageData,
   void,
   { rejectValue: string }
->('store/getAllCharacters', async (_, { rejectWithValue }) => {
+>('store/getCharactersFirstPage', async (_, { rejectWithValue }) => {
   try {
     const { data } = await axios.get(
       `https://rickandmortyapi.com/api/character`,
     );
-    return data.results;
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return rejectWithValue('Server Error!');
+  }
+});
+
+export const getCharactersPaginate = createAsyncThunk<
+  CharactersPageData,
+  string,
+  { rejectValue: string }
+>('store/getCharactersPaginate', async (url, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.get(url);
+    console.log(data);
+
+    return data;
   } catch (error) {
     console.log(error);
     return rejectWithValue('Server Error!');
@@ -57,7 +99,7 @@ export const getSingleCharacter = createAsyncThunk<
     const { data } = await axios.get(
       `https://rickandmortyapi.com/api/character/${id}`,
     );
-    return data.results;
+    return data;
   } catch (error) {
     console.log(error);
     return rejectWithValue('Server Error!');
@@ -70,13 +112,23 @@ export const rickAndMortySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getAllCharacters.pending, (state) => {
+      .addCase(getCharactersFirstPage.pending, (state) => {
         state.loading = true;
         state.error = false;
       })
-      .addCase(getAllCharacters.fulfilled, (state, action) => {
+      .addCase(getCharactersFirstPage.fulfilled, (state, action) => {
         state.loading = false;
-        state.characters = action.payload;
+        state.info = action.payload.info;
+        state.characters = action.payload.results;
+      })
+      .addCase(getCharactersPaginate.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(getCharactersPaginate.fulfilled, (state, action) => {
+        state.loading = false;
+        state.info = action.payload.info;
+        state.characters = action.payload.results;
       })
       .addCase(getSingleCharacter.pending, (state) => {
         state.loading = true;
