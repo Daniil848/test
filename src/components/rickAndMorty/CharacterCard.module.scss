@@ -1,22 +1,22 @@
 .card {
   @apply box-border 
   w-64
-  h-fit
-  p-4
+  h-[370px]
   bg-gray-50
   border
   border-gray-300
   hover:border-green-700
   rounded-lg
-  transition-colors;
+  transition-colors
+  text-start;
 
   .cardImage {
     @apply w-full
-    h-full
-    rounded;
+    h-fit
+    rounded-t;
   }
 
-  .cradName {
-    @apply text-lg;
+  .cardInfo {
+    @apply p-2;
   }
 }

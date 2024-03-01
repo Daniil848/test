@@ -1,7 +1,13 @@
 import React from 'react';
 import styles from './CharacterCard.module.scss';
 
-const CharactercCard = (props: { id: number; name: string; image: string }) => {
+const CharactercCard = (props: {
+  id: number;
+  image: string;
+  name: string;
+  status: string;
+  location: string;
+}) => {
   return (
     <>
       <div className={styles.card}>
@@ -10,7 +16,11 @@ const CharactercCard = (props: { id: number; name: string; image: string }) => {
           alt="charater-image"
           className={styles.cardImage}
         />
-        <p className={styles.cardName}>{props.name}</p>
+        <div className={styles.cardInfo}>
+          <p>Name: {props.name}</p>
+          <p>Status - {props.status}</p>
+          <p>Location - {props.location}</p>
+        </div>
       </div>
     </>
   );

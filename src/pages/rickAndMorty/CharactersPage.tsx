@@ -34,6 +34,8 @@ const CharactersPage = () => {
               id={character.id}
               image={character.image}
               name={character.name}
+              status={character.status}
+              location={character.location.name}
             />
           ))}
         </div>
