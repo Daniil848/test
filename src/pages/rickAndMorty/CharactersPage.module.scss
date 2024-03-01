@@ -1,29 +1,6 @@
 .wrapper {
   @apply mt-20;
 
-  .filters {
-    @apply box-border
-    min-w-full
-    flex
-    gap-4
-    border-b
-    border-gray-200
-    mb-6;
-
-    .filtersInput {
-      @apply w-1/2;
-    }
-
-    .filtersSelects {
-      @apply flex
-      gap-4
-      w-1/2;
-
-      .filtersSelectsItem {
-        @apply w-1/2;
-      }
-    }
-  }
   .cardsContainer {
     @apply grid
     grid-cols-4
