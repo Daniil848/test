@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAppSelector } from '../../app/hooks';
-import Filters from '../../modules/Filters';
-import CharacterCard from '../../components/rickAndMorty/CharacterCard';
-import Pagination from '../../UI/Pagination';
+import { useAppSelector } from '../../../app/hooks';
+import Filters from '../../../modules/filters/Filters';
+import CharacterCard from '../../../components/rickAndMorty/CharacterCard';
+import Pagination from '../../../UI/pagination/Pagination';
 import styles from './CharactersPage.module.scss';
 
 const CharactersPage = () => {

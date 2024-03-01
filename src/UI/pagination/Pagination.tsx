@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePagination } from './logic/usePagination';
+import { usePagination } from './usePagination';
 import styles from './Pagination.module.scss';
 
 const Pagination = () => {

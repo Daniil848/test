@@ -1,8 +1,8 @@
 import React from 'react';
-import { useHomePage } from './logic/useHomePage';
-import Button from '../../UI/Button';
-import Input from '../../UI/Input';
-import Select from '../../UI/Select';
+import { useHomePage } from './useHomePage';
+import Button from '../../../UI/button/Button';
+import Input from '../../../UI/input/Input';
+import Select from '../../../UI/select/Select';
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {

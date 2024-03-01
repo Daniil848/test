@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Select.module.scss';
-import { Course, Student, Visiting } from '../app/types';
+import { Course, Student, Visiting } from '../../app/types';
 
 interface Props {
   label: string;

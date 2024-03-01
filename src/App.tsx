@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './pages/students/HomePage';
-import StudentPage from './pages/students/StudentPage';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import HomePage from './pages/students/homePage/HomePage';
+import StudentPage from './pages/students/studentPage/StudentPage';
 import { Toaster } from 'react-hot-toast';
 import { Routes, Route } from 'react-router';
 import './App.css';
-import CharactersPage from './pages/rickAndMorty/CharactersPage';
+import CharactersPage from './pages/rickAndMorty/charactersPage/CharactersPage';
 
 function App() {
   return (

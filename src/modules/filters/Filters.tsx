@@ -1,7 +1,7 @@
 import React from 'react';
-import { useFilters } from './logic/useFilters';
-import Input from '../UI/Input';
-import Select from '../UI/Select';
+import { useFilters } from './useFilters';
+import Input from '../../UI/input/Input';
+import Select from '../../UI/select/Select';
 import styles from './Filters.module.scss';
 
 const Filters = () => {
