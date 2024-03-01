@@ -5,7 +5,7 @@ import { Course, Student, Visiting } from '../app/types';
 interface Props {
   label: string;
   onChange: React.ChangeEventHandler<HTMLSelectElement> | undefined;
-  optionValues: Student[] | Course[] | Visiting[];
+  optionValues: Student[] | Course[] | Visiting[] | string[];
   error: boolean;
 }
 
@@ -24,7 +24,7 @@ const Select = (props: Partial<Props>) => {
           <option></option>
           {props.optionValues?.map((el: any) => (
             <option key={el.id} value={el.id}>
-              {el.value || el.name}
+              {el.value || el.name || el}
             </option>
           ))}
         </select>

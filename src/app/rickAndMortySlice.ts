@@ -1,7 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Character, CharactersPageData, RickAndMortyState } from './types';
+import {
+  Character,
+  CharactersPageData,
+  Filters,
+  RickAndMortyState,
+} from './types';
 
 const initialState: RickAndMortyState = {
   character: null,
@@ -42,6 +47,24 @@ export const getCharactersPaginate = createAsyncThunk<
 >('store/getCharactersPaginate', async (url, { rejectWithValue }) => {
   try {
     const { data } = await axios.get(url);
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return rejectWithValue('Server Error!');
+  }
+});
+
+export const filterCharacters = createAsyncThunk<
+  CharactersPageData,
+  Filters,
+  { rejectValue: string }
+>('store/filterCharacters', async (filters, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.get(
+      `https://rickandmortyapi.com/api/character/?name=${filters.name}&gender=${filters.gender}&status=${filters.status}`,
+    );
     console.log(data);
 
     return data;
@@ -105,6 +128,15 @@ export const rickAndMortySlice = createSlice({
       .addCase(getSingleCharacter.fulfilled, (state, action) => {
         state.loading = false;
         state.character = action.payload;
+      })
+      .addCase(filterCharacters.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(filterCharacters.fulfilled, (state, action) => {
+        state.loading = false;
+        state.characters = action.payload.results;
+        state.countPage === 1;
       });
   },
 });

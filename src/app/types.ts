@@ -86,3 +86,9 @@ export interface RickAndMortyState {
   loading: boolean;
   error: boolean;
 }
+
+export interface Filters {
+  name: string;
+  gender: string;
+  status: string;
+}
