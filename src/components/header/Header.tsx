@@ -1,8 +1,6 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useHeader } from './useHeader';
 import { Link } from 'react-router-dom';
-import { getStudents } from '../../app/studentsSlice';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
@@ -12,14 +10,13 @@ import FlashOnRoundedIcon from '@mui/icons-material/FlashOnRounded';
 import styles from './Header.module.scss';
 
 const Header = () => {
-  const state = useAppSelector((state) => state.students);
-  const dispatch = useAppDispatch();
-  const [openSidebar, setOpenSidebar] = useState(false);
-  const [openAccordion, setOpenAccordion] = useState(false);
-
-  useEffect(() => {
-    dispatch(getStudents());
-  }, []);
+  const {
+    state,
+    openSidebar,
+    setOpenSidebar,
+    openAccordion,
+    setOpenAccordion,
+  } = useHeader();
 
   if (!state.students) return null;
   return (

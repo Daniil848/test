@@ -1,12 +1,13 @@
 import React from 'react';
-import { useAppSelector } from '../../../app/hooks';
+import { useCharactersPage } from './useCharactersPage';
 import Filters from '../../../modules/filters/Filters';
 import CharacterCard from '../../../components/rickAndMorty/CharacterCard';
 import Pagination from '../../../UI/pagination/Pagination';
 import styles from './CharactersPage.module.scss';
 
 const CharactersPage = () => {
-  const state = useAppSelector((state) => state.rickAndMorty);
+  const { state } = useCharactersPage();
+
   return (
     <>
       <div className={styles.wrapper}>
