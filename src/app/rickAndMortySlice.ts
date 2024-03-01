@@ -135,6 +135,7 @@ export const rickAndMortySlice = createSlice({
       })
       .addCase(filterCharacters.fulfilled, (state, action) => {
         state.loading = false;
+        state.info = action.payload.info;
         state.characters = action.payload.results;
         state.countPage === 1;
       });
