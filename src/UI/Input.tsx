@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Input.module.scss';
 
-const Input = (props: {
+interface Props {
   label: string;
   type: string;
   placeholder: string | undefined;
@@ -11,7 +11,9 @@ const Input = (props: {
     | React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
     | undefined;
   error: boolean;
-}) => {
+}
+
+const Input = (props: Partial<Props>) => {
   return (
     <>
       <div className={styles.container}>
