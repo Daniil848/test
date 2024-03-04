@@ -8,7 +8,8 @@
   flex
   items-center
   bg-green-700
-  text-white;
+  text-white
+  z-10;
 
   .toolBar {
     @apply flex 
@@ -34,7 +35,8 @@
   p-4
   bg-white
   text-gray-600
-  border-r;
+  border-r
+  z-20;
 
   .sideBarClose {
     @apply h-12

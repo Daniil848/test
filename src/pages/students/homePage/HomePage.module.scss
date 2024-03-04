@@ -1,7 +1,7 @@
 .wrapper {
-  @apply h-[100vh] flex items-center;
+  @apply h-[100vh] flex items-start;
   .container {
-    @apply m-auto w-[450px] flex justify-center flex-col flex-grow;
+    @apply relative  mx-auto mt-32 w-[450px] flex justify-center flex-col flex-grow;
 
     .grades {
       @apply flex gap-2;
