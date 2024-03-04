@@ -61,7 +61,10 @@ const HomePage = () => {
               onChange={(e) =>
                 handleRatingChange(index, Number(e.target.value))
               }
-              error={false}
+              error={grades[index] > 5}
+              errorText={
+                grades[index] > 5 ? 'Оценка не должна быть выше 5' : ''
+              }
             ></Input>
             <Select
               label="Посещение"

@@ -11,6 +11,7 @@ interface Props {
     | React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
     | undefined;
   error: boolean;
+  errorText: string;
 }
 
 const Input = (props: Partial<Props>) => {
@@ -27,7 +28,9 @@ const Input = (props: Partial<Props>) => {
           defaultValue={props.defaultValue}
           onChange={props.onChange}
           className={props.error ? styles.inputError : styles.input}
+          min={0}
         ></input>
+        <p className={styles.errorText}>{props.errorText}</p>
       </div>
     </>
   );
