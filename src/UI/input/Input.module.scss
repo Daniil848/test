@@ -1,0 +1,51 @@
+.container {
+  @apply mb-6;
+
+  .label {
+    @apply block
+    mb-2
+    text-sm 
+    font-medium
+    text-start
+    text-green-900;
+  }
+  .labelError {
+    @apply block
+    mb-2
+    text-sm 
+    font-medium
+    text-start
+    text-red-800;
+  }
+
+  .input {
+    @apply bg-gray-50
+    border
+    border-gray-300
+    outline-none
+    text-gray-900
+    text-sm rounded-lg
+    focus:ring-green-700
+    focus:border-green-700
+    block 
+    w-full 
+    p-4;
+  }
+
+  .inputError {
+    @apply bg-gray-50
+    border
+    border-red-300
+    outline-none
+    text-red-900
+    text-sm rounded-lg
+    focus:ring-red-700
+    focus:border-red-700
+    block 
+    w-full 
+    p-4;
+  }
+  .errorText {
+    @apply text-red-900 text-sm mt-1;
+  }
+}

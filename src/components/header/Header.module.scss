@@ -1,0 +1,99 @@
+.bar {
+  @apply fixed 
+  top-0
+  right-0
+  h-16
+  p-4 
+  min-w-full
+  flex
+  items-center
+  bg-green-700
+  text-white
+  z-10;
+
+  .toolBar {
+    @apply flex 
+    justify-start
+    items-center;
+
+    .menuButton {
+      @apply mr-3;
+    }
+    .menuText {
+      @apply font-medium
+      text-[20px];
+    }
+  }
+}
+
+.sideBar {
+  @apply absolute
+  top-0 
+  left-0 
+  min-h-full
+  min-w-[270px]
+  p-4
+  bg-white
+  text-gray-600
+  border-r
+  z-20;
+
+  .sideBarClose {
+    @apply h-12
+    flex
+    justify-between
+    items-center
+    mb-4
+    border-b;
+
+    .sideBarCloseText {
+      @apply font-medium
+      text-[20px];
+    }
+  }
+
+  .sideBarItem {
+    @apply h-10
+    flex 
+    items-center
+    justify-start;
+
+    .sideBarItemText {
+      @apply font-medium
+      text-[20px]
+      ml-3;
+    }
+  }
+
+  .sideBarAccordion {
+    @apply min-h-10;
+
+    .sideBarAccordionSummary {
+      @apply flex
+      justify-between
+      items-center;
+    }
+
+    .sideBarAccordionTitle {
+      @apply flex 
+      items-center;
+
+      .sideBarAccordionText {
+        @apply font-medium
+        text-[20px]
+        ml-3;
+      }
+    }
+    .sideBarAccordionDetails {
+      @apply min-h-0
+      p-2 
+      mt-2
+      block;
+
+      .sideBarAccordionLink {
+        @apply text-start 
+        py-1;
+      }
+    }
+  }
+}

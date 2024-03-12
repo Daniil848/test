@@ -6,13 +6,13 @@ import {
   Visiting,
   StudentGrades,
   EstimateStudent,
-  State,
+  StudentsState,
 } from './types';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { percentVisiting } from '../helpers';
+import { percentVisiting } from '../helpers/percentVisiting';
 
-const initialState: State = {
+const initialState: StudentsState = {
   course: null,
   courses: [],
   student: null,
@@ -23,6 +23,7 @@ const initialState: State = {
   error: false,
   studentErrorInput: false,
   courseErrorInput: false,
+  quantityGradesErrorInput: false,
   visitErrorInput: false,
 };
 
@@ -162,11 +163,6 @@ export const estimateStudent = createAsyncThunk<
         toast.success('Данные добавлены');
         return data;
       } else {
-        const filteredGradesDB = {
-          ...gradesDB,
-          grades: gradesDB.grades.filter((el) => el !== null && el > 1),
-        };
-
         const { data } = await axios.post(
           `http://localhost:3001/studentsRating`,
           gradesDB,
@@ -181,8 +177,8 @@ export const estimateStudent = createAsyncThunk<
   },
 );
 
-export const mainSlice = createSlice({
-  name: 'slice',
+export const studentsSlice = createSlice({
+  name: 'students',
   initialState,
   reducers: {
     setNameError(state) {
@@ -202,6 +198,12 @@ export const mainSlice = createSlice({
     },
     clearVisitError(state) {
       state.visitErrorInput = false;
+    },
+    setQuantityError(state) {
+      state.quantityGradesErrorInput = true;
+    },
+    clearQuantityError(state) {
+      state.quantityGradesErrorInput = false;
     },
   },
 
@@ -268,6 +270,8 @@ export const {
   clearCourseError,
   setVisitError,
   clearVisitError,
-} = mainSlice.actions;
+  setQuantityError,
+  clearQuantityError,
+} = studentsSlice.actions;
 
-export default mainSlice.reducer;
+export default studentsSlice.reducer;

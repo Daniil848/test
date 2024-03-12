@@ -1,0 +1,9 @@
+.wrapper {
+  @apply mt-20;
+
+  .cardsContainer {
+    @apply grid
+    grid-cols-4
+    gap-4;
+  }
+}
